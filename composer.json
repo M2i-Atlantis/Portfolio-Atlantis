@@ -14,25 +14,28 @@
     },
     {
       "name": "Julien GABARD",
-      "email": "",
+      "email": "a@a.fr",
       "role": "Apprenant Développeur"
     },
     {
       "name": "Jonathan GOHIER",
-      "email": "",
+      "email": "a@a.fr",
       "role": "Apprenant Développeur"
     },
     {
       "name": "Aurore PHILIPPE",
-      "email": "",
+      "email": "a@a.fr",
       "role": "Apprenant Développeur"
     },
     {
       "name": "François CURTENAZ",
-      "email": "",
+      "email": "a@a.fr",
       "role": "Apprenant Développeur"
     }
   ],
+  "scripts": {
+    "start": "php -S localhost:8080 -t public"
+  },
   "require-dev": {
     "symfony/var-dumper": "^5.3"
   }
