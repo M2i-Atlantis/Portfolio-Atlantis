@@ -32,16 +32,7 @@
                             <a class="nav-link active" href="#">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">A propos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Projets</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Formation</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
+                            <a class="nav-link active" href="/login">Connexion</a>
                         </li>
                     </ul>
                 </div>
