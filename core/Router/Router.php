@@ -7,21 +7,20 @@ use core\Router\Route\Route;
 
 class Router
 {
-    private static Router $instance;
+    private static $instance;
 
-    private array $routes = [];
+    private $routes = [];
 
-    private array $matches = [];
+    private $matches = [];
 
-    public function match(): ?Route
-    {
+    function match(): ?Route {
         foreach ($this->routes as $route) {
             $regex = $route->getRegex();
 
-            if (preg_match("#^$regex$#", filter_input(INPUT_SERVER, 'REQUEST_URI'), $this->matches)) {
+            if (preg_match("#^" . $regex . "$#", filter_input(INPUT_SERVER, 'REQUEST_URI'), $this->matches)) {
                 array_shift($this->matches);
 
-                foreach ($route->getMethods() as  $method) {
+                foreach ($route->getMethods() as $method) {
                     if ($method === filter_input(INPUT_SERVER, "REQUEST_METHOD")) {
                         return $route;
                     }
