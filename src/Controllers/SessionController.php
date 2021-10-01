@@ -43,6 +43,14 @@ class SessionController extends AbstractController
                 if (password_verify($password, $currentUser->getPassword())) {
 
                     $_SESSION['currentUser'] = $currentUser;
+                    $_SESSION['successMessage'] = "Connexion réussi";
+
+                    $this->renderer->render(
+                        ["layout.html.php"],
+                        ["home", "index.html.php"]
+                    );
+
+                    exit;
                 }
             }
         }
@@ -103,6 +111,7 @@ class SessionController extends AbstractController
 
                     $_SESSION['currentUser'] = $NewUser;
                     $_SESSION['currentUser_id'] = $id;
+                    $_SESSION['successMessage'] = "Compte créé avec succée";
 
                     header('Location: /');
 
@@ -137,6 +146,7 @@ class SessionController extends AbstractController
     public function logout()
     {
         unset($_SESSION['currentUser']);
+        unset($_SESSION['successMessage']);
         header("Location: /login");
     }
 }
