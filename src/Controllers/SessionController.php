@@ -55,6 +55,10 @@ class SessionController
         require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
     }
 
+    /**
+     * Supprime la variable global $_SESSION['currentUser']
+     * Quand l'utilisateur à cliquer sur le lien de Déconnexion
+     */
     public function logout()
     {
         unset($_SESSION['currentUser']);
