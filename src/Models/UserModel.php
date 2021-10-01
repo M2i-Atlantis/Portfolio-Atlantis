@@ -11,9 +11,9 @@ class UserModel
     private string $firstname;
     private string $lastname;
     private string $home_adress;
-    private array $role;
+    private string $role;
     private string $createdAt;
-    private string $last_connected;
+    private ?string $last_connected;
 
     /**
      * Get the value of id
@@ -186,9 +186,9 @@ class UserModel
     /**
      * Get the value of role
      *
-     * @return array
+     * @return string
      */
-    public function getRole(): array
+    public function getRole(): string
     {
         return $this->role;
     }
@@ -196,11 +196,11 @@ class UserModel
     /**
      * Set the value of role
      *
-     * @param array $role
+     * @param string $role
      *
      * @return self
      */
-    public function setRole(array $role): self
+    public function setRole(string $role): self
     {
         $this->role = $role;
 
@@ -234,9 +234,9 @@ class UserModel
     /**
      * Get the value of last_connected
      *
-     * @return string
+     * @return ?string
      */
-    public function getLastConnected(): string
+    public function getLastConnected(): ?string
     {
         return $this->last_connected;
     }
@@ -244,11 +244,11 @@ class UserModel
     /**
      * Set the value of last_connected
      *
-     * @param string $last_connected
+     * @param ?string $last_connected
      *
      * @return self
      */
-    public function setLastConnected(string $last_connected): self
+    public function setLastConnected(?string $last_connected): self
     {
         $this->last_connected = $last_connected;
 
