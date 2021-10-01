@@ -20,3 +20,11 @@ $router->add(
     "authenticate",
     "authenticate"
 );
+
+$router->add(
+    "/(logout)?",
+    ["GET"],
+    "App\Controllers\SessionController",
+    "logout",
+    "logout"
+);

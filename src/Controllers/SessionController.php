@@ -54,4 +54,10 @@ class SessionController
 
         require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
     }
+
+    public function logout()
+    {
+        unset($_SESSION['currentUser']);
+        header("Location: /login");
+    }
 }

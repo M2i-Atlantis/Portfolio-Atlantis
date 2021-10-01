@@ -36,7 +36,7 @@
                         </li>
                         <?php if (isset($_SESSION['currentUser'])): ?>
                             <li class="nav-item">
-                                <a class="nav-link active" href="/login/logout">Déconnexion</a>
+                                <a class="nav-link active" href="/logout">Déconnexion</a>
                             </li>
                         <?php endif; ?>
                     </ul>
