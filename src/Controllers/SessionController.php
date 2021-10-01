@@ -125,6 +125,7 @@ class SessionController extends AbstractController
                 try {
 
                     // Récupérer l'utilisateur inscrie et l'ajouter a la variable globale $_SESSION
+                    $id = (new UserDao())->addUser($user);
 
                     header('Location: /');
 
@@ -132,7 +133,15 @@ class SessionController extends AbstractController
 
                 } catch (PDOException $exception) {
 
-                    echo $exception->getMessage();
+                    // echo $exception->getMessage();
+
+                    $errorMessage = "Adresse email déjà utiliser";
+
+                    $this->renderer->render(
+                        ["layout.html.php"],
+                        ["session", "register.html.php"],
+                        ["title" => 'S\'inscrire', "error" => $errorMessage]
+                    );
                 }
 
             } else {
