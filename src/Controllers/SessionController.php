@@ -124,9 +124,9 @@ class SessionController extends AbstractController
 
                 try {
 
-                    $idUser = (new UserDao())->addUser($user);
+                    // Récupérer l'utilisateur inscrie et l'ajouter a la variable globale $_SESSION
 
-                    header('Location: /', $idUser);
+                    header('Location: /');
 
                     exit;
 
