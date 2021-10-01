@@ -50,9 +50,7 @@
     </header>
 
     <main>
-        <?=
-            $contentTimeout;
-        ?>
+        <?= $content; ?>
     </main>
 
     <footer>

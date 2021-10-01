@@ -7,12 +7,12 @@ class Experience extends BaseEntity
 {
     private int $id;
     private string $name;
-    private ?string $startDate; // DATETIME
+    private string $startDate; // DATETIME
     private ?string $endDate; // DATETIME
-    private string $description;
+    private ?string $description;
     private string $location;
     private string $contractType;
-    private ?int $cvId;
+    private int $cvId;
 
     // public function getId() 
     // {
@@ -35,14 +35,14 @@ class Experience extends BaseEntity
         return $this;
     }
 
-    public function getStartDate(): ?string
+    public function getStartDate(): string
     {
         return $this->startDate;
     }
     
-    public function setStartDate(?string $startDate): self
+    public function setStartDate(string $startDate): self
     {
-        return $this->startDate = $startDate;
+        $this->startDate = $startDate;
         return $this;
     }
 
@@ -52,15 +52,16 @@ class Experience extends BaseEntity
     }
     public function setEndDate(?string $endDate): self
     {
-        return $this->endDate = $endDate;
+        $this->endDate = $endDate;
         return $this;
     }
 
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
-    public function setDescription(string $description): self
+
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
         return $this;
@@ -70,9 +71,10 @@ class Experience extends BaseEntity
     {
         return $this->location;
     }
+
     public function setLocation(string $location): self
     {
-        return $this->location = $location;
+        $this->location = $location;
         return $this;
     }
 
@@ -80,19 +82,21 @@ class Experience extends BaseEntity
     {
         return $this->contractType;
     }
+
     public function setContractType(string $contractType): self
     {
-        return $this->contractType;
+        $this->contractType = $contractType;
         return $this;
     }
 
-    public function getCvId(): ?int
+    public function getCvId(): int
     {
         return $this-> cvId;
     }
+
     public function setCvId(int $cvId): self
     {
-        return $this-> cvId;
+        $this->cvId = $cvId;
         return $this;
     }
 

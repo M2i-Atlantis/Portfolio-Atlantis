@@ -9,34 +9,29 @@
   "authors": [
     {
       "name": "Thibaut CHIRON",
-      "email": "chiron.thibaut@sfr.fr",
       "role": "Formateur"
     },
     {
       "name": "Julien GABARD",
-      "email": "a@a.fr",
       "role": "Apprenant Développeur"
     },
     {
       "name": "Jonathan GOHIER",
-      "email": "a@a.fr",
       "role": "Apprenant Développeur"
     },
     {
       "name": "Aurore PHILIPPE",
-      "email": "a@a.fr",
       "role": "Apprenant Développeur"
     },
     {
       "name": "François CURTENAZ",
-      "email": "a@a.fr",
       "role": "Apprenant Développeur"
     }
   ],
-  "scripts": {
-    "start": "php -S localhost:8080 -t public"
-  },
   "require-dev": {
     "symfony/var-dumper": "^5.3"
+  },
+  "scripts": {
+    "start": "php -S localhost:8000 -t public"
   }
 }
