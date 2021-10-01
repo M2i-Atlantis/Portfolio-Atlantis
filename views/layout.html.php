@@ -53,8 +53,8 @@
     </header>
 
     <main>
-        <?php if (isset($contentTimeout)): ?>
-           <?= $contentTimeout; ?>
+        <?php if (isset($content)): ?>
+           <?= $content; ?>
         <?php endif; ?>
     </main>
 

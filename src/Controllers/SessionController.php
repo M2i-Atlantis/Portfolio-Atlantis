@@ -1,22 +1,21 @@
 <?php
 
-namespace App\Controllers;
+namespace App\controllers;
 
-use App\Dao\UserDao;
+use App\dao\UserDao;
 
-class SessionController
+class SessionController extends AbstractController
 {
     /**
      * Affiche la page de connexion
      */
     public function login()
     {
-        ob_start();
-        $title = 'Connexion';
-        require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "session", "index.html.php"]);
-        $contentTimeout = ob_get_clean();
-
-        require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+        $this->renderer->render(
+            ["layout.html.php"],
+            ["session", "index.html.php"],
+            ["title" => 'Connexion']
+        );
     }
 
     /**
@@ -28,6 +27,9 @@ class SessionController
         $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 
         $currentUser = (new UserDao())->findByEmail($email);
+
+        $errorMessage = '';
+        $successMessage = '';
 
         if (empty($currentUser)) {
 
@@ -47,12 +49,11 @@ class SessionController
             }
         }
 
-        ob_start();
-        $title = 'Connexion';
-        require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "session", "index.html.php"]);
-        $contentTimeout = ob_get_clean();
-
-        require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+        $this->renderer->render(
+            ["layout.html.php"],
+            ["session", "index.html.php"],
+            ["error" => $errorMessage, "success" => $successMessage]
+        );
     }
 
     /**
@@ -60,12 +61,10 @@ class SessionController
      */
     public function register()
     {
-        ob_start();
-        $title = 'S\'inscrire';
-        require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "session", "register.html.php"]);
-        $contentTimeout = ob_get_clean();
-
-        require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+        $this->renderer->render(
+            ["layout.html.php"],
+            ["session", "register.html.php"],
+        );
     }
 
     /**

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Dao;
+namespace App\dao;
 
-use App\Models\UserModel;
+use App\models\UserModel;
 
 class UserDao extends AbstractDao
 {

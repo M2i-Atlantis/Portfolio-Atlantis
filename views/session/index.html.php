@@ -1,13 +1,13 @@
 <div class="container my-4">
     <h2>Se connecter</h2>
 
-    <?php if(isset($errorMessage)): ?>
+    <?php if(!empty($error)): ?>
         <div class="alert alert-danger" role="alert">
-            <?= $errorMessage ?>
+            <?= $error ?>
         </div>
-    <?php elseif(isset($successMessage)): ?>
+    <?php elseif(!empty($success)): ?>
         <div class="alert alert-success" role="alert">
-            <?= $successMessage ?>
+            <?= $success ?>
         </div>
     <?php endif; ?>
     

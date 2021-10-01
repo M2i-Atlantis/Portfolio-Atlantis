@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Dao;
+namespace App\dao;
 
 use core\Database;
 use PDO;

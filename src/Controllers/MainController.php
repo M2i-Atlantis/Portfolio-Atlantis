@@ -1,14 +1,17 @@
 <?php
 
-namespace App\Controllers;
+namespace App\controllers;
 
-class MainController
+class MainController extends AbstractController
 {
     /**
      * Affiche la page d'accueil
      */
     public function index()
     {
-        require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+        $this->renderer->render(
+            ["layout.html.php"],
+            ["home", "index.html.php"],
+        );
     }
 }
