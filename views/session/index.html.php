@@ -1,13 +1,11 @@
 <div class="container my-4">
     <h2>Se connecter</h2>
 
-    <?php if(!empty($error)): ?>
+    <?php if(!empty($errors)): ?>
         <div class="alert alert-danger" role="alert">
-            <?= $error ?>
-        </div>
-    <?php elseif(!empty($success)): ?>
-        <div class="alert alert-success" role="alert">
-            <?= $success ?>
+            <?php foreach ($errors as $currentError) : ?>
+                <div><?= $currentError ?></div>
+            <?php endforeach ?>
         </div>
     <?php endif; ?>
     

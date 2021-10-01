@@ -23,6 +23,23 @@ class ErrorController
     }
 
     /**
+     * Méthode gérant les érreurs du formulaire pour se connecter
+     */
+    public function loginError(string $email, string $password): ?array
+    {
+        $errorList = [];
+
+        if (empty($email)) {
+            $errorList[] = 'L\'adresse email ne doit pas être vide';
+        }
+        if (empty($password)) {
+            $errorList[] = 'Le mot de passe ne doit pas être vide';
+        }
+
+        return $errorList;
+    }
+
+    /**
      * Méthode gérant les érreurs du formulaire pour s'inscrire
      */
     public function registerError(array $registerUser_input): ?array

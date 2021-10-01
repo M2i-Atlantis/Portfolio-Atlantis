@@ -28,33 +28,29 @@ class SessionController extends AbstractController
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
         $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 
-        $currentUser = (new UserDao())->findByEmail($email);
+        $errorList = ErrorController::loginError($email, $password);
 
-        $errorMessage = '';
-        $successMessage = '';
+        if (empty($errorList)) {
 
-        if (empty($currentUser)) {
+            $currentUser = (new UserDao())->findByEmail($email);
 
-            $errorMessage = 'Veuillez remplir tout les champs !';
+            if (empty($currentUser)) {
 
-        } else {
-
-            if (password_verify($password, $currentUser->getPassword())) {
-
-                $successMessage = 'Connexion réussi';
-
-                $_SESSION['currentUser'] = $currentUser;
+                $errorList[] = 'Aucun compte existe avec l\'email : ' . $email;
 
             } else {
 
-                $errorMessage = 'Adresse email ou mot de passe invalide';
+                if (password_verify($password, $currentUser->getPassword())) {
+
+                    $_SESSION['currentUser'] = $currentUser;
+                }
             }
         }
 
         $this->renderer->render(
             ["layout.html.php"],
             ["session", "index.html.php"],
-            ["error" => $errorMessage, "success" => $successMessage]
+            ["errors" => $errorList]
         );
     }
 
