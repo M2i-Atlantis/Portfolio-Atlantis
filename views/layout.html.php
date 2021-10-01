@@ -29,7 +29,7 @@
                 <div class="collapse navbar-collapse flex-row-reverse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">Accueil</a>
+                            <a class="nav-link active" href="/">Accueil</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" href="/login">Connexion</a>
@@ -46,9 +46,9 @@
     </header>
 
     <main>
-        <?=
-            $contentTimeout;
-        ?>
+        <?php if (isset($contentTimeout)): ?>
+           <?= $contentTimeout; ?>
+        <?php endif; ?>
     </main>
 
     <footer>

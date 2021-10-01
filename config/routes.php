@@ -3,10 +3,21 @@
 // $router->add();
 
 /**************
+ *    HOME    *
+ **************/
+$router->add(
+    "/?",
+    ["GET"],
+    "App\Controllers\MainController",
+    "index",
+    "home"
+);
+
+/**************
  *    USER    *
  **************/
 $router->add(
-    "/(login)?",
+    "/(login)",
     ["GET"],
     "App\Controllers\SessionController",
     "login",
@@ -14,7 +25,7 @@ $router->add(
 );
 
 $router->add(
-    "/(login)?",
+    "/(login)",
     ["POST"],
     "App\Controllers\SessionController",
     "authenticate",
@@ -22,7 +33,7 @@ $router->add(
 );
 
 $router->add(
-    "/(logout)?",
+    "/(logout)",
     ["GET"],
     "App\Controllers\SessionController",
     "logout",
