@@ -31,9 +31,6 @@
                         <li class="nav-item">
                             <a class="nav-link active" href="/">Accueil</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/login">Connexion</a>
-                        </li>
                         <?php if (isset($_SESSION['currentUser'])): ?>
                             <li class="nav-item">
                                 <a class="nav-link active" href="#">Mon compte</a>
@@ -42,6 +39,9 @@
                                 <a class="nav-link active" href="/logout">Déconnexion</a>
                             </li>
                         <?php else: ?>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/login">Connexion</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link active" href="/register">S'inscrire</a>
                             </li>

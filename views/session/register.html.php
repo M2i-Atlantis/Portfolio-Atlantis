@@ -1,7 +1,7 @@
 <div class="container my-4">
     <h2>S'inscrire</h2>
 
-    <?php if(empty($error)): ?>
+    <?php if(!empty($errors)): ?>
         <div class="alert alert-danger" role="alert">
             <?php foreach ($errors as $currentError) : ?>
                 <div><?= $currentError ?></div>
