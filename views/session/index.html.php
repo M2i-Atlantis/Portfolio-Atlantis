@@ -23,4 +23,7 @@
         </div>
         <button type="submit" class="btn btn-primary float-end">Connexion</button>
     </form>
+    <p class="small mt-3">
+        Pas de compte ? <a href="/register" class="link-danger">S'incrire</a>
+    </p>
 </div>
