@@ -6,9 +6,17 @@
  *    USER    *
  **************/
 $router->add(
-    "/login?",
+    "/(login)?",
     ["GET"],
-    "App\Controllers\UserController",
+    "App\Controllers\SessionController",
     "login",
     "login"
+);
+
+$router->add(
+    "/(login)?",
+    ["POST"],
+    "App\Controllers\SessionController",
+    "authenticate",
+    "authenticate"
 );
