@@ -65,8 +65,6 @@ class SessionController extends AbstractController
     {
         $request_method = filter_input(INPUT_SERVER, "REQUEST_METHOD");
 
-        $errorMessage = '';
-
         if ($request_method === 'GET') {
 
             $this->renderer->render(
@@ -86,47 +84,29 @@ class SessionController extends AbstractController
                 "adress" => [FILTER_SANITIZE_STRING]
             ];
 
-            $register_user = filter_input_array(INPUT_POST, $arguments);
+            $registerUser_input = filter_input_array(INPUT_POST, $arguments);
 
-            if (
-                isset($register_user["username"]) &&
-                isset($register_user["email"]) &&
-                isset($register_user["password"]) &&
-                isset($register_user["lastname"]) &&
-                isset($register_user["firstname"]) &&
-                isset($register_user["adress"])
-            ) {
-                if (
-                    empty($register_user["username"]) ||
-                    empty($register_user["email"]) ||
-                    empty($register_user["password"]) ||
-                    empty($register_user["lastname"]) ||
-                    empty($register_user["firstname"]) ||
-                    empty($register_user["adress"])
-                ) {
+            $errorList = ErrorController::registerError($registerUser_input);
 
-                    $errorMessage = 'Veuillez remplir tout les champs !';
-                }
-            }
+            if (empty($errorList)) {
 
-            $passwordHash = password_hash($register_user['password'], PASSWORD_DEFAULT);
+                $passwordHash = password_hash($registerUser_input['password'], PASSWORD_DEFAULT);
 
-            $user = (new UserModel())
-            ->setUsername($register_user['username'])
-            ->setEmailAdress($register_user['email'])
-            ->setPassword($passwordHash)
-            ->setLastname($register_user['lastname'])
-            ->setFirstname($register_user['firstname'])
-            ->setHomeAdress($register_user['adress'])
-            ->setRole('["ROLE_USER"]');
-
-            if (empty($errorMessage)) {
+                $NewUser = (new UserModel())
+                    ->setUsername($registerUser_input['username'])
+                    ->setEmailAdress($registerUser_input['email'])
+                    ->setPassword($passwordHash)
+                    ->setLastname($registerUser_input['lastname'])
+                    ->setFirstname($registerUser_input['firstname'])
+                    ->setHomeAdress($registerUser_input['adress'])
+                    ->setRole('["ROLE_USER"]');
 
                 try {
 
-                    $id = (new UserDao())->addUser($user);
-                    $_SESSION['currentUser'] = $user;
-                    $_SESSION['user_id'] = $id;
+                    $id = (new UserDao())->addUser($NewUser);
+
+                    $_SESSION['currentUser'] = $NewUser;
+                    $_SESSION['currentUser_id'] = $id;
 
                     header('Location: /');
 
@@ -136,12 +116,10 @@ class SessionController extends AbstractController
 
                     // echo $exception->getMessage();
 
-                    $errorMessage = "Adresse email déjà utiliser";
-
                     $this->renderer->render(
                         ["layout.html.php"],
                         ["session", "register.html.php"],
-                        ["title" => 'S\'inscrire', "error" => $errorMessage]
+                        ["title" => 'S\'inscrire']
                     );
                 }
 
@@ -150,7 +128,7 @@ class SessionController extends AbstractController
                 $this->renderer->render(
                     ["layout.html.php"],
                     ["session", "register.html.php"],
-                    ["title" => 'S\'inscrire', "error" => $errorMessage]
+                    ["title" => 'S\'inscrire', "errors" => $errorList, "inputContent" => $registerUser_input]
                 );
             }
         }
