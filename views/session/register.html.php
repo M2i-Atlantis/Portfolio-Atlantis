@@ -1,20 +1,20 @@
 <div class="container my-4">
     <h2>S'inscrire</h2>
 
-    <?php if(isset($errorMessage)): ?>
+    <?php if(!empty($error)): ?>
         <div class="alert alert-danger" role="alert">
-            <?= $errorMessage ?>
+            <?= $error ?>
         </div>
-    <?php elseif(isset($successMessage)): ?>
+    <?php elseif(!empty($success)): ?>
         <div class="alert alert-success" role="alert">
-            <?= $successMessage ?>
+            <?= $success ?>
         </div>
     <?php endif; ?>
     
     <form action="" method="POST" class="mt-5">
         <div class="mb-3">
             <label for="username" class="form-label">Nom d'utilisateur</label>
-            <input type="username" class="form-control" id="username" name="username">
+            <input type="text" class="form-control" id="username" name="username">
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
@@ -37,7 +37,7 @@
         </div>
         <div class="mb-3">
             <label for="adress" class="form-label">Adresse</label>
-            <input type="username" class="form-control" id="adress" name="adress" placeholder="00 nom de la rue, 00000 ville">
+            <input type="text" class="form-control" id="adress" name="adress" placeholder="00 nom de la rue, 00000 ville">
         </div>
         <button type="submit" class="btn btn-primary float-end">S'inscrire</button>
     </form>

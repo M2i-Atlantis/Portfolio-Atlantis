@@ -33,7 +33,7 @@ class SessionController extends AbstractController
 
         if (empty($currentUser)) {
 
-            $errorMessage = 'Veuillez remplir les champs !';
+            $errorMessage = 'Veuillez remplir tout les champs !';
 
         } else {
 
@@ -61,10 +61,51 @@ class SessionController extends AbstractController
      */
     public function register()
     {
-        $this->renderer->render(
-            ["layout.html.php"],
-            ["session", "register.html.php"],
-        );
+        $request_method = filter_input(INPUT_SERVER, "REQUEST_METHOD");
+
+        $errorMessage = '';
+        $successMessage = '';
+
+        if ($request_method === 'GET') {
+
+            $this->renderer->render(
+                ["layout.html.php"],
+                ["session", "register.html.php"],
+                ["title" => 'S\'inscrire'],
+            );
+
+        } elseif ($request_method === 'POST') {
+
+            $arguments = [
+                "username" => [FILTER_SANITIZE_STRING],
+                "email" => [FILTER_VALIDATE_EMAIL],
+                "password" => [FILTER_SANITIZE_STRING],
+                "lastname" => [FILTER_SANITIZE_STRING],
+                "firstname" => [FILTER_SANITIZE_STRING],
+                "adress" => [FILTER_SANITIZE_STRING]
+            ];
+
+            $register = filter_input_array(INPUT_POST, $arguments);
+
+            if (
+                isset($register["username"]) &&
+                isset($register["email"]) &&
+                isset($register["password"]) &&
+                isset($register["lastname"]) &&
+                isset($register["firstname"]) &&
+                isset($register["adress"])
+            ) {
+                $errorMessage = 'Veuillez remplir tout les champs !';
+            }
+
+            // TODO
+
+            $this->renderer->render(
+                ["layout.html.php"],
+                ["session", "register.html.php"],
+                ["title" => 'S\'inscrire', "error" => $errorMessage, "success" => $successMessage]
+            );
+        }
     }
 
     /**
