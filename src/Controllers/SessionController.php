@@ -3,6 +3,8 @@
 namespace App\controllers;
 
 use App\dao\UserDao;
+use App\Models\UserModel;
+use PDOException;
 
 class SessionController extends AbstractController
 {
@@ -37,7 +39,7 @@ class SessionController extends AbstractController
 
         } else {
 
-            if ($password === $currentUser->getPassword()) {
+            if (password_verify($password, $currentUser->getPassword())) {
 
                 $successMessage = 'Connexion réussi';
 
@@ -64,7 +66,6 @@ class SessionController extends AbstractController
         $request_method = filter_input(INPUT_SERVER, "REQUEST_METHOD");
 
         $errorMessage = '';
-        $successMessage = '';
 
         if ($request_method === 'GET') {
 
@@ -85,26 +86,63 @@ class SessionController extends AbstractController
                 "adress" => [FILTER_SANITIZE_STRING]
             ];
 
-            $register = filter_input_array(INPUT_POST, $arguments);
+            $register_user = filter_input_array(INPUT_POST, $arguments);
 
             if (
-                isset($register["username"]) &&
-                isset($register["email"]) &&
-                isset($register["password"]) &&
-                isset($register["lastname"]) &&
-                isset($register["firstname"]) &&
-                isset($register["adress"])
+                isset($register_user["username"]) &&
+                isset($register_user["email"]) &&
+                isset($register_user["password"]) &&
+                isset($register_user["lastname"]) &&
+                isset($register_user["firstname"]) &&
+                isset($register_user["adress"])
             ) {
-                $errorMessage = 'Veuillez remplir tout les champs !';
+                if (
+                    empty($register_user["username"]) ||
+                    empty($register_user["email"]) ||
+                    empty($register_user["password"]) ||
+                    empty($register_user["lastname"]) ||
+                    empty($register_user["firstname"]) ||
+                    empty($register_user["adress"])
+                ) {
+
+                    $errorMessage = 'Veuillez remplir tout les champs !';
+                }
             }
 
-            // TODO
+            $passwordHash = password_hash($register_user['password'], PASSWORD_DEFAULT);
 
-            $this->renderer->render(
-                ["layout.html.php"],
-                ["session", "register.html.php"],
-                ["title" => 'S\'inscrire', "error" => $errorMessage, "success" => $successMessage]
-            );
+            $user = (new UserModel())
+            ->setUsername($register_user['username'])
+            ->setEmailAdress($register_user['email'])
+            ->setPassword($passwordHash)
+            ->setLastname($register_user['lastname'])
+            ->setFirstname($register_user['firstname'])
+            ->setHomeAdress($register_user['adress'])
+            ->setRole('["ROLE_USER"]');
+
+            if (empty($errorMessage)) {
+
+                try {
+
+                    $idUser = (new UserDao())->addUser($user);
+
+                    header('Location: /', $idUser);
+
+                    exit;
+
+                } catch (PDOException $exception) {
+
+                    echo $exception->getMessage();
+                }
+
+            } else {
+
+                $this->renderer->render(
+                    ["layout.html.php"],
+                    ["session", "register.html.php"],
+                    ["title" => 'S\'inscrire', "error" => $errorMessage]
+                );
+            }
         }
     }
 

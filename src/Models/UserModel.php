@@ -12,7 +12,6 @@ class UserModel
     private string $lastname;
     private string $home_adress;
     private string $role;
-    private string $createdAt;
     private ?string $last_connected;
 
     /**
@@ -203,30 +202,6 @@ class UserModel
     public function setRole(string $role): self
     {
         $this->role = $role;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of createdAt
-     *
-     * @return string
-     */
-    public function getCreatedAt(): string
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * Set the value of createdAt
-     *
-     * @param string $createdAt
-     *
-     * @return self
-     */
-    public function setCreatedAt(string $createdAt): self
-    {
-        $this->createdAt = $createdAt;
 
         return $this;
     }

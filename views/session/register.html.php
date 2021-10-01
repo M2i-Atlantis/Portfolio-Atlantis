@@ -5,10 +5,6 @@
         <div class="alert alert-danger" role="alert">
             <?= $error ?>
         </div>
-    <?php elseif(!empty($success)): ?>
-        <div class="alert alert-success" role="alert">
-            <?= $success ?>
-        </div>
     <?php endif; ?>
     
     <form action="" method="POST" class="mt-5">
