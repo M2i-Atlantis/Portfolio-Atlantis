@@ -35,7 +35,7 @@ class ErrorController
         if ($registerUser_input['email'] === false) {
             $errorList[] = 'L\'email est invalide';
         }
-        if(!preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$/', $registerUser_input['password'])) {
+        if(!preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$/', $registerUser_input['password']) && !empty($registerUser_input['password'])) {
             $errorList[] = 'Le mot de passe doit contenir au moins 8 caractères dont au moins une majuscule, une minuscule, un chiffre et des caractères non alphanumeriques';
         }
         if (empty($registerUser_input['password'])) {
