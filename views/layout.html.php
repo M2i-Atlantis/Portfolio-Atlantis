@@ -41,6 +41,10 @@
                             <li class="nav-item">
                                 <a class="nav-link active" href="/logout">Déconnexion</a>
                             </li>
+                        <?php else: ?>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/register">S'inscrire</a>
+                            </li>
                         <?php endif; ?>
                     </ul>
                 </div>

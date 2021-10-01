@@ -56,6 +56,19 @@ class SessionController
     }
 
     /**
+     * Affiche la page pour que l'utilisateur puisse s'inscrire
+     */
+    public function register()
+    {
+        ob_start();
+        $title = 'S\'inscrire';
+        require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "session", "register.html.php"]);
+        $contentTimeout = ob_get_clean();
+
+        require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+    }
+
+    /**
      * Supprime la variable global $_SESSION['currentUser']
      * Quand l'utilisateur à cliquer sur le lien de Déconnexion
      */

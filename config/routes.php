@@ -13,9 +13,9 @@ $router->add(
     "home"
 );
 
-/**************
- *    USER    *
- **************/
+/*****************
+ *    SESSION    *
+ *****************/
 $router->add(
     "/(login)",
     ["GET"],
@@ -33,9 +33,21 @@ $router->add(
 );
 
 $router->add(
+    "/(register)",
+    ["GET", "POST"],
+    "App\Controllers\SessionController",
+    "register",
+    "register"
+);
+
+$router->add(
     "/(logout)",
     ["GET"],
     "App\Controllers\SessionController",
     "logout",
     "logout"
 );
+
+/**************
+ *    USER    *
+ **************/
