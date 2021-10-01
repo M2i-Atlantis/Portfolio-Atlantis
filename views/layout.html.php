@@ -36,6 +36,9 @@
                         </li>
                         <?php if (isset($_SESSION['currentUser'])): ?>
                             <li class="nav-item">
+                                <a class="nav-link active" href="#">Mon compte</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link active" href="/logout">Déconnexion</a>
                             </li>
                         <?php endif; ?>
