@@ -14,7 +14,7 @@
     <!-- Personal JavaScript -->
     <script src="/js/app.js" defer></script>
 
-    <title><?= $title ? $title : 'portfolio' ?></title>
+    <title><?= isset($title) ? $title : 'portfolio' ?></title>
 </head>
 <body>
     <header>
