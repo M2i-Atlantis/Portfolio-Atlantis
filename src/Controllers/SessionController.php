@@ -48,6 +48,10 @@ class SessionController extends AbstractController
                     );
 
                     exit;
+
+                } else {
+
+                    $errorList[] = "Adresse email ou mot de passe incorrect";
                 }
             }
         }
