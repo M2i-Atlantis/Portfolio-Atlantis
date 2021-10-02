@@ -33,17 +33,20 @@ $router->add(
 );
 
 $router->add(
-    "/(register)",
-    ["GET", "POST"],
-    "App\controllers\SessionController",
-    "register",
-    "user_register"
-);
-
-$router->add(
     "/(logout)",
     ["GET"],
     "App\controllers\SessionController",
     "logout",
     "logout"
+);
+
+/**************
+ *    USER    *
+ **************/
+$router->add(
+    "/(register)",
+    ["GET", "POST"],
+    "App\controllers\UserController",
+    "createUser",
+    "user_register"
 );
