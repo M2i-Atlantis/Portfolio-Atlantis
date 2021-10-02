@@ -33,8 +33,8 @@
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Mot de passe</label>
-            <input type="password" class="form-control" id="password" name="password">
-            <div id="passwordHelp" class="form-text">Dois contenir au moins 8 caractères dont une majuscule, un chiffre et un caractère non-alphanumérique.</div>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Remplissez ce champ si vous voulez modifier le mot de passe.">
+            <div id="passwordHelp" class="form-text">Dois contenir entre 8 et 15 caractères dont une majuscule, un chiffre et un caractère non-alphanumérique.</div>
         </div>
         <div class="row g-3 mb-3">
             <div class="col-md-6">

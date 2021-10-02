@@ -60,4 +60,26 @@ class UserDao extends AbstractDao
 
         return $this->pdo->lastInsertId();
     }
+
+    /**
+     * Modifie un utilisateur
+     */
+    public function edit(UserModel $user): void
+    {
+        $sql = 'UPDATE user
+                SET username = :username, email_adress = :email, password = :password, lastname = :lastname, firstname = :firstname, home_adress = :adress
+                WHERE id = :id';
+
+        $request = $this->pdo->prepare($sql);
+
+        $request->execute([
+            ":id" => $user->getId(),
+            ":username" => $user->getUsername(),
+            ":email" => $user->getEmailAdress(),
+            ":password" => $user->getPassword(),
+            ":lastname" => $user->getLastname(),
+            ":firstname" => $user->getFirstname(),
+            ":adress" => $user->getHomeAdress()
+        ]);
+    }
 }

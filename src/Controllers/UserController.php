@@ -64,12 +64,12 @@ class UserController extends AbstractController
 
                 } catch (PDOException $exception) {
 
-                    // echo $exception->getMessage();
+                    $errorList[] = $exception->getMessage();
 
                     $this->renderer->render(
                         ["layout.html.php"],
                         ["user", "register.html.php"],
-                        ["title" => 'S\'inscrire']
+                        ["title" => 'S\'inscrire',  "errors" => $errorList]
                     );
                 }
 
@@ -96,8 +96,55 @@ class UserController extends AbstractController
             $this->renderer->render(
                 ["layout.html.php"],
                 ["user", "edit.html.php"],
-                ["title" => 'Modifier mes informations', "inputContent" => $_SESSION['currentUser']],
+                ["title" => 'Modifier mes informations', "inputContent" => $_SESSION['currentUser']]
             );
+
+        } elseif ($request_method === 'POST') {
+
+            $arguments = [
+                "username" => [FILTER_SANITIZE_STRING],
+                "email" => [FILTER_VALIDATE_EMAIL],
+                "password" => [FILTER_SANITIZE_STRING],
+                "lastname" => [FILTER_SANITIZE_STRING],
+                "firstname" => [FILTER_SANITIZE_STRING],
+                "adress" => [FILTER_SANITIZE_STRING]
+            ];
+
+            $editUser_input = filter_input_array(INPUT_POST, $arguments);
+
+            $errorList = ErrorController::editError($editUser_input);
+
+            if  (empty($editUser_input['password'])) {
+                $editUser_input['password'] = $_SESSION['currentUser']->getPassword();
+            }
+
+            if (empty($errorList)) {
+
+                $userDao = new UserDao();
+
+                $user = $userDao->findById($_SESSION['currentUser']->getId());
+
+                $user->setUsername($editUser_input['username'])
+                    ->setEmailAdress($editUser_input['email'])
+                    ->setPassword($editUser_input['password'])
+                    ->setLastname($editUser_input['lastname'])
+                    ->setFirstname($editUser_input['firstname'])
+                    ->setHomeAdress($editUser_input['adress']);
+
+                $userDao->edit($user);
+
+                $_SESSION['currentUser'] = $user;
+
+                header("Location: /");
+
+            } else {
+
+                $this->renderer->render(
+                    ["layout.html.php"],
+                    ["user", "edit.html.php"],
+                    ["title" => 'Modifier mes informations', "errors" => $errorList, "inputContent" => $_SESSION['currentUser']]
+                );
+            }
         }
     }
 }

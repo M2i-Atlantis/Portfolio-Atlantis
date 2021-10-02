@@ -26,15 +26,15 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
     
-                <div class="collapse navbar-collapse flex-row-reverse" id="navbarNav">
-                    <ul class="navbar-nav">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav  me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link" href="/">Accueil</a>
                         </li>
                         <?php if (isset($_SESSION['currentUser'])): ?>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Mon compte
+                                    <?= $_SESSION['currentUser']->getUsername() ?>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                     <li><a class="dropdown-item" href="/user/edit">Modifier</a></li>
