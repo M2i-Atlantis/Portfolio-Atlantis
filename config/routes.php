@@ -8,7 +8,7 @@
 $router->add(
     "/?",
     ["GET"],
-    "App\controllers\MainController",
+    "MainController",
     "index",
     "home"
 );
@@ -19,7 +19,7 @@ $router->add(
 $router->add(
     "/(login)",
     ["GET"],
-    "App\controllers\SessionController",
+    "SessionController",
     "login",
     "login"
 );
@@ -27,7 +27,7 @@ $router->add(
 $router->add(
     "/(login)",
     ["POST"],
-    "App\controllers\SessionController",
+    "SessionController",
     "authenticate",
     "user_authenticate"
 );
@@ -35,7 +35,7 @@ $router->add(
 $router->add(
     "/(logout)",
     ["GET"],
-    "App\controllers\SessionController",
+    "SessionController",
     "logout",
     "logout"
 );
@@ -46,7 +46,7 @@ $router->add(
 $router->add(
     "/(register)",
     ["GET", "POST"],
-    "App\controllers\UserController",
+    "UserController",
     "createUser",
     "user_register"
 );
@@ -54,7 +54,7 @@ $router->add(
 $router->add(
     "/(user)/(edit)",
     ["GET", "POST"],
-    "App\controllers\UserController",
+    "UserController",
     "editUser",
     "user_register"
 );
