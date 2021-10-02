@@ -29,21 +29,24 @@
                 <div class="collapse navbar-collapse flex-row-reverse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link active" href="/">Accueil</a>
+                            <a class="nav-link" href="/">Accueil</a>
                         </li>
                         <?php if (isset($_SESSION['currentUser'])): ?>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="#">Mon compte</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="/logout">Déconnexion</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Mon compte
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                                    <li><a class="dropdown-item" href="/account/edit">Modifier</a></li>
+                                    <li><a class="dropdown-item" href="/logout">Déconnexion</a></li>
+                                </ul>
                             </li>
                         <?php else: ?>
                             <li class="nav-item">
-                                <a class="nav-link active" href="/login">Connexion</a>
+                                <a class="nav-link" href="/login">Connexion</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="/register">S'inscrire</a>
+                                <a class="nav-link" href="/register">S'inscrire</a>
                             </li>
                         <?php endif; ?>
                     </ul>
