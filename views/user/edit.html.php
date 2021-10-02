@@ -17,7 +17,7 @@
                 class="form-control"
                 id="username"
                 name="username"
-                value=""
+                value="<?= $inputContent->getUsername() ?>"
             >
         </div>
         <div class="mb-3">
@@ -27,7 +27,7 @@
                 class="form-control"
                 id="email" name="email"
                 placeholder="name@example.com"
-                value=""
+                value="<?= $inputContent->getEmailAdress() ?>"
             >
             <div id="emailHelp" class="form-text">Nous ne partagerons jamais votre e-mail avec quelqu'un d'autre.</div>
         </div>
@@ -44,7 +44,7 @@
                     class="form-control"
                     id="lastname"
                     name="lastname"
-                    value=""
+                    value="<?= $inputContent->getLastname() ?>"
                 >
             </div>
             <div class="col-md-6">
@@ -54,7 +54,7 @@
                     class="form-control"
                     id="firstname"
                     name="firstname"
-                    value=""
+                    value="<?= $inputContent->getFirstname() ?>"
                 >
             </div>
         </div>
@@ -65,8 +65,8 @@
                 class="form-control"
                 id="adress"
                 name="adress"
-                placeholder="00 nom de la rue, 00000 ville"
-                value=""
+                placeholder="Exemple : 00 nom de la rue, 00000 ville"
+                value="<?= $inputContent->getHomeAdress() ?>"
             >
         </div>
         <button type="submit" class="btn btn-primary float-end">Modifier</button>

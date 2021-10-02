@@ -65,7 +65,7 @@
                 class="form-control"
                 id="adress"
                 name="adress"
-                placeholder="00 nom de la rue, 00000 ville"
+                placeholder="Exemple : 00 nom de la rue, 00000 ville"
                 value="<?= empty($inputContent['adress']) ? '' : $inputContent['adress'] ?>"
             >
         </div>
