@@ -42,10 +42,7 @@ class SessionController extends AbstractController
 
                     $_SESSION['currentUser'] = $currentUser;
 
-                    $this->renderer->render(
-                        ["layout.html.php"],
-                        ["cv", "index.html.php"]
-                    );
+                    header("Location: /");
 
                     exit;
 
