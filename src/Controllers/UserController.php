@@ -19,7 +19,7 @@ class UserController extends AbstractController
 
             $this->renderer->render(
                 ["layout.html.php"],
-                ["session", "register.html.php"],
+                ["user", "register.html.php"],
                 ["title" => 'S\'inscrire'],
             );
 
@@ -54,9 +54,9 @@ class UserController extends AbstractController
                 try {
 
                     $id = (new UserDao())->addUser($NewUser);
+                    $currentUser = (new UserDao())->findById($id);
 
-                    $_SESSION['currentUser'] = $NewUser;
-                    $_SESSION['currentUser_id'] = $id;
+                    $_SESSION['currentUser'] = $currentUser;
 
                     header('Location: /');
 
@@ -68,7 +68,7 @@ class UserController extends AbstractController
 
                     $this->renderer->render(
                         ["layout.html.php"],
-                        ["session", "register.html.php"],
+                        ["user", "register.html.php"],
                         ["title" => 'S\'inscrire']
                     );
                 }
@@ -77,7 +77,7 @@ class UserController extends AbstractController
 
                 $this->renderer->render(
                     ["layout.html.php"],
-                    ["session", "register.html.php"],
+                    ["user", "register.html.php"],
                     ["title" => 'S\'inscrire', "errors" => $errorList, "inputContent" => $registerUser_input]
                 );
             }
@@ -85,10 +85,19 @@ class UserController extends AbstractController
     }
 
     /**
-     * Méthode permettant de modifier un utilisateur
+     * Méthode permettant de modifier un utilisateur dans la BDD
      */
     public function editUser()
     {
-        // TODO
+        $request_method = filter_input(INPUT_SERVER, "REQUEST_METHOD");
+
+        if ($request_method === 'GET') {
+
+            $this->renderer->render(
+                ["layout.html.php"],
+                ["user", "edit.html.php"],
+                ["title" => 'Modifier mes informations', "inputContent" => $_SESSION['currentUser']],
+            );
+        }
     }
 }

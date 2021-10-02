@@ -50,3 +50,11 @@ $router->add(
     "createUser",
     "user_register"
 );
+
+$router->add(
+    "/(user)/(edit)",
+    ["GET", "POST"],
+    "App\controllers\UserController",
+    "editUser",
+    "user_register"
+);

@@ -66,7 +66,6 @@ class SessionController extends AbstractController
     public function logout()
     {
         unset($_SESSION['currentUser']);
-        unset($_SESSION['successMessage']);
         header("Location: /login");
     }
 }

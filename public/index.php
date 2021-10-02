@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 use core\Database;
 use core\Renderer;
 use core\Router\Exception\RouteNotFoundException;
@@ -28,6 +26,11 @@ $router = Router::getInstance();
  * Require du fichier de routes
  */
 require implode(DIRECTORY_SEPARATOR, [ROOT, 'config', 'routes.php']);
+
+/**
+ * Démarre un nouvelle session
+ */
+session_start();
 
 try {
     $route = $router->match();

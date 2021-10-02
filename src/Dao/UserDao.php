@@ -23,6 +23,22 @@ class UserDao extends AbstractDao
     }
 
     /**
+     * Récupère un utilisateur avec l'id
+     */
+    public function findById(int $id): UserModel|false
+    {
+        $sql = 'SELECT * FROM user WHERE id LIKE :id';
+
+        $request = $this->pdo->prepare($sql);
+
+        $request->execute([
+            ":id" => $id
+        ]);
+
+        return $request->fetchObject(UserModel::class);
+    }
+
+    /**
      * Ajoute un Utilisateur dans la base donnée
      */
     public function addUser(UserModel $user): int
