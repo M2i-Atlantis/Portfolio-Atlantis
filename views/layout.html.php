@@ -37,7 +37,7 @@
                                     Mon compte
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                    <li><a class="dropdown-item" href="/account/edit">Modifier</a></li>
+                                    <li><a class="dropdown-item" href="/user/edit">Modifier</a></li>
                                     <li><a class="dropdown-item" href="/logout">Déconnexion</a></li>
                                 </ul>
                             </li>
