@@ -11,7 +11,7 @@ class MainController extends AbstractController
     {
         $this->renderer->render(
             ["layout.html.php"],
-            ["home", "index.html.php"],
+            ["cv", "index.html.php"],
         );
     }
 }
