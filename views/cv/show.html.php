@@ -1,6 +1,6 @@
 <div class="container my-4">
     <h1 class="text-center mb-3">
-        Nom d'utilisateur
+        <?= $cv->lastname ?> <?= $cv->firstname ?>
     </h1>
 
     <!-- About -->
@@ -20,10 +20,7 @@
             </h4>
         </div>
         <div class="card-body">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Harum fugit officia nam repellendus voluptates quae dolore placeat aspernatur, 
-            itaque molestias voluptatibus recusandae culpa quia, 
-            dignissimos repellat ullam deleniti, sequi vitae!
+            <?= $cv->getAboutme() ?>
         </div>
     </div>
 
