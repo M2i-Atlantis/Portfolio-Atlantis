@@ -27,4 +27,12 @@ class CvController extends AbstractController
             ["title" => "Tous les CV", "allCv" => $allCv]
         );
     }
+
+    /**
+     * Méthode permettant d'afficher un CV celon sont id
+     */
+    public function showCvById()
+    {
+        // TODO
+    }
 }

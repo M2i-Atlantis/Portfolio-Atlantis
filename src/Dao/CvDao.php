@@ -22,4 +22,23 @@ class CvDao extends AbstractDao
 
         return $request->fetchAll(PDO::FETCH_CLASS, CvModel::class);
     }
+
+    /**
+     * Récupère un CV en fonction de son id
+     */
+    public function getById(int $id): CvModel|false
+    {
+        $sql = 'SELECT cv.*, user.firstname, user.lastname
+                FROM cv
+                LEFT JOIN user ON user.id = id_user
+                WHERE id = :id';
+
+        $request = $this->pdo->prepare($sql);
+
+        $request->execute([
+            ":id" => $id
+        ]);
+
+        return $request->fetchObject(CvModel::class);
+    }
 }
