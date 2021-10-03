@@ -1,21 +1,9 @@
 <?php
-// add(string "regex", array "methods", string "controller", string "action", string "name")
-// $router->add();
-
-/**************
- *    HOME    *
- **************/
-$router->add(
-    "/?",
-    ["GET"],
-    "MainController",
-    "index",
-    "home"
-);
 
 /*****************
  *    SESSION    *
  *****************/
+
 $router->add(
     "/(login)",
     ["GET"],
@@ -43,6 +31,7 @@ $router->add(
 /**************
  *    USER    *
  **************/
+
 $router->add(
     "/(register)",
     ["GET", "POST"],
@@ -56,5 +45,17 @@ $router->add(
     ["GET", "POST"],
     "UserController",
     "editUser",
-    "user_register"
+    "user_edit"
+);
+
+/**************
+ *    CV    *
+ **************/
+
+$router->add(
+    "/?",
+    ["GET"],
+    "CvController",
+    "showAllCv",
+    "home"
 );
