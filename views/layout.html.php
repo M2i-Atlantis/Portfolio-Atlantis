@@ -29,7 +29,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav  me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link" href="/">List de CV</a>
+                                <a class="nav-link" href="/">Liste des CV</a>
                             </li>
                         <?php if (isset($_SESSION['currentUser'])): ?>
                             <li class="nav-item dropdown">
