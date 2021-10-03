@@ -11,7 +11,7 @@ class UserController extends AbstractController
     /**
      * Méthode permettant d'ajouter un utilisateur
      */
-    public function createUser()
+    public function createUser(): void
     {
         $request_method = filter_input(INPUT_SERVER, "REQUEST_METHOD");
 
@@ -90,7 +90,7 @@ class UserController extends AbstractController
     /**
      * Méthode permettant de modifier un utilisateur dans la BDD
      */
-    public function editUser()
+    public function editUser(): void
     {
         $request_method = filter_input(INPUT_SERVER, "REQUEST_METHOD");
 
