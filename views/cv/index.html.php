@@ -72,7 +72,7 @@
                     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                 </div>
                 <div class="card-footer">
-                    <span class="badge bg-info text-dark">CDD</span>
+                    <span class="badge bg-primary">CDD</span>
                 </div>
             </div>
         </div>
@@ -123,9 +123,9 @@
                     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                 </div>
                 <div class="card-footer text-muted">
-                    <span class="badge bg-info text-dark">PHP</span>
-                    <span class="badge bg-info text-dark">MVC</span>
-                    <span class="badge bg-info text-dark">Windows</span>
+                    <span class="badge bg-primary">PHP</span>
+                    <span class="badge bg-primary">MVC</span>
+                    <span class="badge bg-primary">Windows</span>
                 </div>
             </div>
         </div>
