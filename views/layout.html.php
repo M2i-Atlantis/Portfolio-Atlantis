@@ -37,7 +37,7 @@
                                     <?= $_SESSION['currentUser']->getUsername() ?>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                    <li><a class="dropdown-item" href="<?= sprintf('/cv/%d', $_SESSION['currentUser']->cv_id) ?>">Mon CV</a></li>
+                                    <li><a class="dropdown-item" href="#">Mon CV</a></li>
                                     <li><a class="dropdown-item" href="/user/edit">Modifier</a></li>
                                     <li><a class="dropdown-item" href="/logout">Déconnexion</a></li>
                                 </ul>
