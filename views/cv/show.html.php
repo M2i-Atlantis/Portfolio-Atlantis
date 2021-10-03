@@ -9,7 +9,7 @@
             <h4 class="card-title">
                 A propos
 
-                <?php if (isset($_SESSION['currentUser'])): ?>
+                <?php if (isset($_SESSION['currentUser']) && $_SESSION['currentUser']->getId() === $cv->getIduser()): ?>
                     <!-- Icon edit -->
                     <a href="#" class="link-light float-end">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
@@ -30,7 +30,7 @@
             <h4 class="card-title">
                 Expériences
 
-                <?php if (isset($_SESSION['currentUser'])): ?>
+                <?php if (isset($_SESSION['currentUser']) && $_SESSION['currentUser']->getId() === $cv->getIduser()): ?>
                     <!-- Icon add -->
                     <a href="#" class="link-light float-end">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
@@ -46,7 +46,7 @@
                     <h5 class="card-title">
                         Auchan
 
-                        <?php if (isset($_SESSION['currentUser'])): ?>
+                        <?php if (isset($_SESSION['currentUser']) && $_SESSION['currentUser']->getId() === $cv->getIduser()): ?>
                             <!-- Icon delete -->
                             <a href="#" class="link-dark float-end ms-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -81,7 +81,7 @@
             <h4 class="card-title">
                 Projets
 
-                <?php if (isset($_SESSION['currentUser'])): ?>
+                <?php if (isset($_SESSION['currentUser']) && $_SESSION['currentUser']->getId() === $cv->getIduser()): ?>
                     <!-- Icon add -->
                     <a href="#" class="link-light float-end">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
@@ -97,7 +97,7 @@
                     <h5 class="card-title">
                         Portfolio
 
-                        <?php if (isset($_SESSION['currentUser'])): ?>
+                        <?php if (isset($_SESSION['currentUser']) && $_SESSION['currentUser']->getId() === $cv->getIduser()): ?>
                             <!-- Icon delete -->
                             <a href="#" class="link-dark float-end ms-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -134,7 +134,7 @@
             <h4 class="card-title">
                 Formations
 
-                <?php if (isset($_SESSION['currentUser'])): ?>
+                <?php if (isset($_SESSION['currentUser']) && $_SESSION['currentUser']->getId() === $cv->getIduser()): ?>
                     <!-- Icon add -->
                     <a href="#" class="link-light float-end">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
@@ -150,7 +150,7 @@
                     <h5 class="card-title">
                         O'clock
 
-                        <?php if (isset($_SESSION['currentUser'])): ?>
+                        <?php if (isset($_SESSION['currentUser']) && $_SESSION['currentUser']->getId() === $cv->getIduser()): ?>
                             <!-- Icon delete -->
                             <a href="#" class="link-dark float-end ms-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
