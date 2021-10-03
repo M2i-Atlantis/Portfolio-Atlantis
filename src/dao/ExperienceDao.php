@@ -40,6 +40,35 @@ class ExperienceDao extends AbstractDao implements CrudInterface
     }
 
     /**
+     * Récupération de toutes les expériences par l'ID du CV.
+     *
+     * @return Experience[]
+     */
+    public function getByCvId(int $idCv): array
+    {
+        $req = $this->pdo->prepare("SELECT * FROM experience WHERE id_cv = :idCv");
+        $req->execute([":idCv" => $idCv]);
+        $result = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        // Parser les données récupérer et les mettre dans un tableau d'expériences
+
+        foreach ($result as $key => $experience) {
+            $exp = new Experience();
+            $exp->setId($experience['id']);
+            $exp->setStartDate($experience['starting_date']);
+            $exp->setEndDate($experience['ending_date']);
+            $exp->setLocation($experience['location']);
+            $exp->setDescription($experience['description']);
+            $exp->setName($experience['name']);
+            $exp->setContractType($experience['type_of_contract']);
+            $exp->setCvId($experience['id_cv']);
+
+            $result[$key] = $exp;
+        }
+        return $result;
+    }
+
+    /**
      * Insertion d'une nouvelle expérience
      *
      * @param Experience $experience experience à insérer
@@ -82,17 +111,17 @@ class ExperienceDao extends AbstractDao implements CrudInterface
         // Instancier une nouvelle experience qu'on retourne avec les données récupérées
 
         if (!empty($result)) {
-            return 
-                ($res = new Experience());
-                $res->setId($result['id']);
-                $res->setStartDate($result['starting_date']);
-                $res->setEndDate($result['ending_date']);
-                $res->setLocation($result['location']);
-                $res->setDescription($result['description']);
-                $res->setName($result['name']);
-                $res->setContractType($result['type_of_contract']);
-                $res->setCvId($result['id_cv']);
+            $exp = new Experience();
+            $exp->setId($result['id']);
 
+            return $exp
+                ->setStartDate($result['starting_date'])
+                ->setEndDate($result['ending_date'])
+                ->setLocation($result['location'])
+                ->setDescription($result['description'])
+                ->setName($result['name'])
+                ->setContractType($result['type_of_contract'])
+                ->setCvId($result['id_cv']);
         } else {
             return null;
         }

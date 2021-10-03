@@ -2,13 +2,12 @@
 
 namespace App\models;
 
-
 class Experience extends BaseEntity
 {
     private int $id;
     private string $name;
-    private string $startDate; // DATETIME
-    private ?string $endDate; // DATETIME
+    private string $startDate; 
+    private ?string $endDate; 
     private ?string $description;
     private string $location;
     private string $contractType;
