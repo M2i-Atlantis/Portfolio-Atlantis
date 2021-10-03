@@ -11,7 +11,11 @@ class UserDao extends AbstractDao
      */
     public function findByEmail(string $email): UserModel|false
     {
-        $sql = 'SELECT * FROM user WHERE email_adress LIKE :email';
+        $sql = 'SELECT user.*, cv.id as cv_id
+                FROM user
+                LEFT JOIN cv ON cv.id_user = user.id
+                WHERE email_adress
+                LIKE :email';
 
         $request = $this->pdo->prepare($sql);
 
@@ -27,7 +31,11 @@ class UserDao extends AbstractDao
      */
     public function findById(int $id): UserModel|false
     {
-        $sql = 'SELECT * FROM user WHERE id LIKE :id';
+        $sql = 'SELECT user.*, cv.id as cv_id
+                FROM user
+                LEFT JOIN cv ON cv.id_user = user.id
+                WHERE id
+                LIKE :id';
 
         $request = $this->pdo->prepare($sql);
 
@@ -44,7 +52,7 @@ class UserDao extends AbstractDao
     public function addUser(UserModel $user): int
     {
         $sql = 'INSERT INTO user (username, email_adress, password, lastname, firstname, home_adress, role, last_connected)
-        VALUE (:username, :email_adress, :password, :lastname, :firstname, :home_adress, :role, NOW())';
+                VALUE (:username, :email_adress, :password, :lastname, :firstname, :home_adress, :role, NOW())';
 
         $request = $this->pdo->prepare($sql);
 
@@ -88,7 +96,9 @@ class UserDao extends AbstractDao
      */
     public function updateLastConnected(int $id): void
     {
-        $sql = 'UPDATE user SET last_connected = NOW() WHERE id = :id';
+        $sql = 'UPDATE user
+                SET last_connected = NOW()
+                WHERE id = :id';
 
         $request = $this->pdo->prepare($sql);
 
