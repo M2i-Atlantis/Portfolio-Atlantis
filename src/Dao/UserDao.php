@@ -43,8 +43,8 @@ class UserDao extends AbstractDao
      */
     public function addUser(UserModel $user): int
     {
-        $sql = 'INSERT INTO user (username, email_adress, password, lastname, firstname, home_adress, role)
-        VALUE (:username, :email_adress, :password, :lastname, :firstname, :home_adress, :role)';
+        $sql = 'INSERT INTO user (username, email_adress, password, lastname, firstname, home_adress, role, last_connected)
+        VALUE (:username, :email_adress, :password, :lastname, :firstname, :home_adress, :role, NOW())';
 
         $request = $this->pdo->prepare($sql);
 
