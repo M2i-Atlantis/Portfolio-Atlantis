@@ -1,6 +1,6 @@
 <div class="container my-4">
     <h1 class="text-center mb-3">
-        Nom d'utilisateur
+        <?= isset($_SESSION['currentUser']) ? $_SESSION['currentUser']->getUsername() : 'Nom d\'utilisateur' ?>
     </h1>
 
     <!-- About -->
