@@ -61,7 +61,7 @@ $router->add(
 );
 
 $router->add(
-    "/(cv)/(\d+)",
+    "/cv/(\d+)",
     ["GET"],
     "CvController",
     "showCvById",
