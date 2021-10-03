@@ -31,7 +31,7 @@ class CvDao extends AbstractDao
         $sql = 'SELECT cv.*, user.firstname, user.lastname
                 FROM cv
                 LEFT JOIN user ON user.id = id_user
-                WHERE id = :id';
+                WHERE cv.id = :id';
 
         $request = $this->pdo->prepare($sql);
 
