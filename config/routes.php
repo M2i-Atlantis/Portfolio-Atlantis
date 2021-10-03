@@ -59,3 +59,11 @@ $router->add(
     "showAllCv",
     "home"
 );
+
+$router->add(
+    "/cv/(\d+)",
+    ["GET"],
+    "CvController",
+    "showCvById",
+    "cv"
+);
