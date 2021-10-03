@@ -84,14 +84,16 @@ class UserDao extends AbstractDao
     }
 
     /**
-     * Méthode permettant de mettre à jours la dernière connexion dans la base de donnée
+     * Méthode permettant de mettre à jours la dernière connexion de l'utilisateur selon l'id
      */
-    public function updateLastConnected(): void
+    public function updateLastConnected(int $id): void
     {
-        $sql = 'UPDATE user SET last_connected = NOW()';
+        $sql = 'UPDATE user SET last_connected = NOW() WHERE id = :id';
 
         $request = $this->pdo->prepare($sql);
 
-        $request->execute();
+        $request->execute([
+            ":id" => $id
+        ]);
     }
 }

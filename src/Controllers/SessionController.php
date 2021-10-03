@@ -32,8 +32,6 @@ class SessionController extends AbstractController
 
             $userDao = new UserDao();
 
-            $userDao->updateLastConnected();
-
             $currentUser = $userDao->findByEmail($email);
 
             if (empty($currentUser)) {
@@ -45,6 +43,8 @@ class SessionController extends AbstractController
                 if (password_verify($password, $currentUser->getPassword())) {
 
                     $_SESSION['currentUser'] = $currentUser;
+                    
+                    $userDao->updateLastConnected($_SESSION['currentUser']->getId());
 
                     header("Location: /");
 
