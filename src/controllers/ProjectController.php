@@ -8,11 +8,13 @@ use App\models\Project;
 class ProjectController{
 
 
-    
-    function create() : Project{
+    /**
+     * Rentre les données du nouveau projet dans la BDD
+     */
+    function create() : void{
     $method = filter_input(INPUT_SERVER, 'REQUEST_METHOD');
     
-
+//  Si la page est ouverte sans envoi de données dans le POST, affiche le formulaire adapté grâce au GET
     if($method === "GET"){
      
 
@@ -37,43 +39,66 @@ class ProjectController{
       $project->setBeginningDate("$_POST[beginning]");
       $project->setEndingDate("$_POST[ending]");
       $project->setPicture("$_POST[picture]");
+//  IdCV marqué en dur en attendant la syntaxe exacte de la variable
       $project->setIdCv(1);
 
       $projectDao = (new ProjectDao)->create($project);
       $project->setId($projectDao);
-     
-      //  Afficher l'objet et je lrenvoi a une nouvelle view 
-    }
 
-
-
-
-
-
-
-
-    dump($method);
-    $project = new Project;
-    return $project;
-    }
-
-    function update() : void {
+// Redirection vers la page du projet créé
+      header(sprintf("Location: /project/{$project->getId()}/show", ));
+                    exit;
 
     }
+  }
+/**
+ * Cherche et Affiche la vue du projet
+ * @param : int $id du projet a récupérer
+ */
+  function getById(int $id) : void {
 
-    function delete() : void {
+    $method = filter_input(INPUT_SERVER, 'REQUEST_METHOD');
+   
+    if($method === "GET"){
+      
+
+      $project = new ProjectDao;
+      $object = $project->getById($id);
+
+      ob_start();
+
+      require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "ProjectView", "ProjectShowOne.html.php"]);
+
+      $contentTimeout = ob_get_clean();
+
+      require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+
 
     }
+  }
 
-    function getAll() : array{
-      return $test = [];
 
-    }
 
-    function getById() : array{
-        return $test = [];
 
-    }
+
+
+
+    // $project = new Project;
+    // return $project;
+    // }
+
+    // function update() : void {
+
+    // }
+
+    // function delete() : void {
+
+    // }
+
+    // function getAll() : array{
+    //   return $test = [];
+
+    // }
 
 
 }
