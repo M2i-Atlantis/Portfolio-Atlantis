@@ -82,4 +82,16 @@ class UserDao extends AbstractDao
             ":adress" => $user->getHomeAdress()
         ]);
     }
+
+    /**
+     * Méthode permettant de mettre à jours la dernière connexion dans la base de donnée
+     */
+    public function updateLastConnected(): void
+    {
+        $sql = 'UPDATE user SET last_connected = NOW()';
+
+        $request = $this->pdo->prepare($sql);
+
+        $request->execute();
+    }
 }

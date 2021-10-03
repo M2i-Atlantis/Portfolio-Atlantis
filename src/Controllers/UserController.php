@@ -53,8 +53,11 @@ class UserController extends AbstractController
 
                 try {
 
-                    $id = (new UserDao())->addUser($NewUser);
-                    $currentUser = (new UserDao())->findById($id);
+                    $userDao = new UserDao();
+
+                    $id = $userDao->addUser($NewUser);
+
+                    $currentUser = $userDao->findById($id);
 
                     $_SESSION['currentUser'] = $currentUser;
 

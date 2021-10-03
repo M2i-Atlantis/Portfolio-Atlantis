@@ -30,7 +30,11 @@ class SessionController extends AbstractController
 
         if (empty($errorList)) {
 
-            $currentUser = (new UserDao())->findByEmail($email);
+            $userDao = new UserDao();
+
+            $userDao->updateLastConnected();
+
+            $currentUser = $userDao->findByEmail($email);
 
             if (empty($currentUser)) {
 
