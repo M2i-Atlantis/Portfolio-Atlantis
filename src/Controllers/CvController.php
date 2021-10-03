@@ -42,7 +42,7 @@ class CvController extends AbstractController
 
                 $this->renderer->render(
                     ["layout.html.php"],
-                    ["cv", "showAll.html.php"],
+                    ["cv", "show.html.php"],
                     ["title" => "Tous les CV", "cv" => $cv]
                 );
 
