@@ -13,7 +13,7 @@ $router->add(
     "/(training)",
     ["GET"],
     "App\controllers\TrainingController",
-    "getAll",
+    "showAll",
     "training"
 );
 
@@ -28,7 +28,7 @@ $router->add(
     "/(training)/(\d+)/show",
     ["GET"],
     "App\controllers\TrainingController",
-    "show",
+    "showById",
     "training_show"
 );
 $router->add(

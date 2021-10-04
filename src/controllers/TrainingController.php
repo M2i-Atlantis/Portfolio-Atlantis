@@ -12,7 +12,7 @@ class trainingController
      *
      * @return void
      */
-    public function getAll()
+    public function showAll()
     {
         if (!$_SESSION['currentUser']) {
             header("Location: /");
@@ -105,7 +105,7 @@ class trainingController
         }
     }
 
-    public function show(): void
+    public function showById(): void
     {
 
         if (!$_SESSION['currentUser']) {
@@ -137,9 +137,9 @@ class trainingController
     public function edit()
     {
 
-        // if (!$_SESSION['currentUser']) {
-        //     header("Location: /");
-        // }
+        if (!$_SESSION['currentUser']) {
+            header("Location: /");
+        }
 
         $param = explode("/", filter_input(INPUT_SERVER, "REQUEST_URI"));
         $request_method = filter_input(INPUT_SERVER, "REQUEST_METHOD");
@@ -183,15 +183,21 @@ class trainingController
                         $_SESSION["error_msg"] = $key . " inexistant";
                     }
 
-                    if ($countError == 0) {
+                    if ($countError === 0) {
                         // enregistre les modification en base de donnée et recupere les élémnts pour les afficher
-                        $editTraining = new Training;
+                        $editTraining = (new Training())
+                            ->setSchool_name($training_post["school_name"])
+                            ->setTraining_name($training_post["training_name"])
+                            ->setDescription($training_post["description"])
+                            ->setDiploma($training_post["diploma"])
+                            ->setStarting_date($training_post["starting_date"])
+                            ->setEnding_date($training_post["ending_date"])
+                            ->setId_cv($training_post["id_cv"]);
+
                         $editTraining->edit($training_post, $param[2]);
                         return $editTraining;
                     }
-
                 }
-
             }
 
         } catch (Exception $e) {
