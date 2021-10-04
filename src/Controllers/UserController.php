@@ -55,13 +55,16 @@ class UserController extends AbstractController
                 try {
 
                     $userDao = new UserDao();
+
                     $id = $userDao->addUser($NewUser);
+
+                    $cvDao = new CvDao();
+
+                    $cvDao->create($id);
+
                     $currentUser = $userDao->findById($id);
 
                     $_SESSION['currentUser'] = $currentUser;
-
-                    $cvDao = new CvDao();
-                    $cvDao->create($_SESSION['currentUser']->getId());
 
                     header('Location: /');
 
