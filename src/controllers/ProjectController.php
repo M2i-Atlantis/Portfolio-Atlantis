@@ -77,8 +77,13 @@ class ProjectController{
     }
   }
 
+/**
+ * Récupère tout les projets d'un utilisateur(cv) précis
+ * @param int $id = L'id du cv
+ * @return array un tableau de tout les projets du cv 
+ */
 
-  function getAll(){
+  function getAll($id){
 
     $projets = new ProjectDao;
     $allProjects = $projets->getAll(1);
@@ -100,13 +105,15 @@ class ProjectController{
   }
 
 
-  // function update(int $id) : void {
+  function update(int $id) : void {
+
+
     
 
 
 
 
-  // }
+  }
 
     // function update() : void {
 

@@ -65,10 +65,11 @@ class ProjectDao {
             return null;
         }      
     }
+
 /**
  * Récupère tout les projets d'un utilisateur(cv) précis
  * @param int $id = L'id du cv
- * @return array un tabnleau de tout les projets du cv 
+ * @return array un tableau de tout les projets du cv 
  */
     public function getAll(int $id) : array {
 
