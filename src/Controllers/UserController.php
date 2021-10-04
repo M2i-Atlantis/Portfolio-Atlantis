@@ -5,7 +5,7 @@ namespace App\controllers;
 use App\dao\CvDao;
 use PDOException;
 use App\dao\UserDao;
-use App\Models\UserModel;
+use App\models\UserModel;
 
 class UserController extends AbstractController
 {

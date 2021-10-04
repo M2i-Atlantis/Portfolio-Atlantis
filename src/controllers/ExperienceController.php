@@ -3,10 +3,10 @@
 namespace App\controllers;
 
 use App\dao\ExperienceDao;
-use App\dao\TypeOfContractDao;
+use App\dao\ContractDao;
 use App\models\Experience;
 use App\models\BaseEntity;
-use App\models\TypeOfContract;
+use App\models\Contract;
 use core\Renderer;
 use core\Validator;
 use PDOException;
@@ -28,8 +28,9 @@ class ExperienceController extends AbstractController
         }
 
         $this->renderer->render(
-            ["layout.html.php"],
+            
             ["experience", "index.html.php"],
+            ["experience", "show.html.php"],
             ["title" => "Expériences", "experiences" => $experiences, "idCv" => $idCv]);
     }
 
@@ -65,14 +66,13 @@ class ExperienceController extends AbstractController
                 else {
                     $experience = $this->createInDataBase($experience);
                     if (isset($experience)) {
-                        $this->redirectToRoute("experience_index", [$idCv]);
+                        $this->redirectToRoute("cv", [$idCv]);
                     }
                     else {
                         // Erreur => Réaffichage de la page
                         $this->showCreateForm($idCv, $experience);
                     }
                 }
-
                 break;
             }
         }
@@ -80,12 +80,14 @@ class ExperienceController extends AbstractController
 
     /** Affiche le formulaire de création */
     private function showCreateForm(int $idCv, ?Experience $experience = null, ?array $errors = null) {
-        $contracts = (new TypeOfContractDao())->getAll();
+    // private function showCreateForm(?Experience $experience = null, ?array $errors = null) {   
+        $contracts = (new ContractDao())->getAll();
 
         $this->renderer->render(
             ["layout.html.php"],
             ["experience", "create.html.php"],
             ["title" => "Nouvelle expérience", "experience" => $experience, "idCv" => $idCv, "contracts" => $contracts, "errors" => $errors]);
+            // ["title" => "Nouvelle expérience", "experience" => $experience, "idCv" => $idCv, "contracts" => $contracts, "errors" => $errors]);
     }
 
     /** Obtient un validateur de données POST purifiés de l'expérience */
@@ -142,15 +144,16 @@ class ExperienceController extends AbstractController
 
     #region Show
 
-    public function show(int $id) {
-        $experience = (new ExperienceDao())->getById($id);
+    // Obsolète
+    // public function show(int $id) {
+    //     $experience = (new ExperienceDao())->getById($id);
 
-        $this->renderer->render(
-            ["layout.html.php"],
-            ["experience", "show.html.php"],
-            ["title" => $experience->getName(), "experience" => $experience]
-        );
-    }
+    //     $this->renderer->render(
+    //         ["layout.html.php"],
+    //         ["experience", "show.html.php"],
+    //         ["title" => $experience->getName(), "experience" => $experience]
+    //     );
+    // }
 
     #endregion
 
@@ -181,7 +184,7 @@ class ExperienceController extends AbstractController
         
                     $experienceDao->delete($id);
         
-                    $this->redirectToRoute("experience_index", [$experience->getCvId()]);
+                    $this->redirectToRoute("cv", [$experience->getCvId()]);
                 } catch (PDOException $e) {
                     echo $e->getMessage();
                 }
@@ -220,7 +223,7 @@ class ExperienceController extends AbstractController
                 }
                 else {
                     $this->updateInDataBase($experience);
-                    $this->showEditForm($experience);
+                    $this->redirectToRoute("cv", [$experience->getCvId()]);
                 }
 
                 break;
@@ -230,7 +233,7 @@ class ExperienceController extends AbstractController
 
     /** Affiche le formulaire de modification */
     private function showEditForm(Experience $experience, ?array $errors = null) {
-        $contracts = (new TypeOfContractDao())->getAll();
+        $contracts = (new ContractDao())->getAll();
 
         $this->renderer->render(
             ["layout.html.php"],

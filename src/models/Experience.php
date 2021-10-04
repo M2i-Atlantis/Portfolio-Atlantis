@@ -4,13 +4,13 @@ namespace App\models;
 
 class Experience extends BaseEntity
 {
-    private int $id;
+    // private int $id;
     private string $name;
     private string $startDate; 
     private ?string $endDate; 
     private ?string $description;
     private string $location;
-    private string $contractType;
+    private int $contractType;
     private int $cvId;
 
     // public function getId() 
@@ -77,12 +77,12 @@ class Experience extends BaseEntity
         return $this;
     }
 
-    public function getContractType(): string
+    public function getContractType(): int
     {
         return $this->contractType;
     }
 
-    public function setContractType(string $contractType): self
+    public function setContractType(int $contractType): self
     {
         $this->contractType = $contractType;
         return $this;

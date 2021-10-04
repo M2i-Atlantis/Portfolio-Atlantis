@@ -2,7 +2,9 @@
 
 namespace App\controllers;
 
+use App\dao\ContractDao;
 use App\dao\CvDao;
+Use App\dao\ExperienceDao;
 use App\models\CvModel;
 use PDOException;
 
@@ -30,7 +32,7 @@ class CvController extends AbstractController
     }
 
     /**
-     * Méthode permettant d'afficher un CV celon sont id
+     * Méthode permettant d'afficher un CV selon son id
      */
     public function showCvById(int $id): void
     {
@@ -38,14 +40,18 @@ class CvController extends AbstractController
 
             $cv = (new CvDao())->getById($id);
 
-            if ($cv instanceof CvModel) {
+            $experiences = (new ExperienceDao())->getByCvId($id);
+            $contracts = (new ContractDao())->getAll();
+            // Obtenir aussi les expériences du CV grâce à la dao associée
 
+            if ($cv instanceof CvModel) {
                 $this->renderer->render(
                     ["layout.html.php"],
                     ["cv", "show.html.php"],
-                    ["title" => "Tous les CV", "cv" => $cv]
+                    // ["title" => "Tous les CV", "cv" => $cv] 
+                    // Ajouter les données récupérées (tableau des expériences)
+                    ["title" => "Tous les CV", "cv" => $cv, "experiences" => $experiences, "contracts" => $contracts]
                 );
-
             } else {
 
                 $this->redirectToRoute('home');

@@ -3,7 +3,7 @@
 namespace App\models;
 
 abstract class BaseEntity {
-    private int $id;
+    protected int $id;
 
     public function getId() 
     {

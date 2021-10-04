@@ -2,16 +2,16 @@
 namespace App\dao;
 
 use core\Database;
-use models\TypeOfContract;
+use models\Contract;
 use models\BaseEntity;
 use PDO;
 
-class TypeOfContractDao extends AbstractDao
+class ContractDao extends AbstractDao
 {
     /**
      * Récupération de tous les types de contract
      *
-     * @return TypeOfContract[]
+     * @return Contract[]
      */
     public function getAll(): array
     {
