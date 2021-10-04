@@ -11,7 +11,7 @@ class UserDao extends AbstractDao
      */
     public function findByEmail(string $email): UserModel|false
     {
-        $sql = 'SELECT user.*, cv.id as id_cv
+        $sql = 'SELECT user.*, cv.id as cv_id
                 FROM user
                 LEFT JOIN cv ON cv.id_user = user.id
                 WHERE email_adress
@@ -31,10 +31,10 @@ class UserDao extends AbstractDao
      */
     public function findById(int $id): UserModel|false
     {
-        $sql = 'SELECT user.*, cv.id as id_cv
+        $sql = 'SELECT user.*, cv.id as cv_id
                 FROM user
                 LEFT JOIN cv ON cv.id_user = user.id
-                WHERE id
+                WHERE user.id
                 LIKE :id';
 
         $request = $this->pdo->prepare($sql);

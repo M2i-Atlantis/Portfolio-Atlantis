@@ -2,6 +2,7 @@
 
 namespace App\controllers;
 
+use App\dao\CvDao;
 use PDOException;
 use App\dao\UserDao;
 use App\Models\UserModel;
@@ -54,12 +55,13 @@ class UserController extends AbstractController
                 try {
 
                     $userDao = new UserDao();
-
                     $id = $userDao->addUser($NewUser);
-
                     $currentUser = $userDao->findById($id);
 
                     $_SESSION['currentUser'] = $currentUser;
+
+                    $cvDao = new CvDao();
+                    $cvDao->create($_SESSION['currentUser']->getId());
 
                     header('Location: /');
 

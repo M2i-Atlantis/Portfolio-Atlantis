@@ -41,4 +41,20 @@ class CvDao extends AbstractDao
 
         return $request->fetchObject(CvModel::class);
     }
+
+    /**
+     * Permet de créer un nouveau CV
+     */
+    public function create(int $id): void
+    {
+        $sql = 'INSERT INTO cv (about_me, id_user)
+                VALUE (:about_me, :id_user)';
+
+        $request = $this->pdo->prepare($sql);
+
+        $request->execute([
+            "about_me" => '',
+            ":id_user" => $id
+        ]);
+    }
 }
