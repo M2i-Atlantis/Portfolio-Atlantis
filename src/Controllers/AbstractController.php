@@ -9,6 +9,7 @@ use core\Router\Router;
 abstract class AbstractController extends ErrorController
 {
     public function __construct(
+        protected Router $router,
         protected Renderer $renderer
     )
     {
