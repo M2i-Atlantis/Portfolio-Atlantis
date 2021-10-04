@@ -46,7 +46,7 @@ class Router
         $this->routes[] = new Route(
             $regex,
             $methods,
-            $controller,
+            "App\controllers\\$controller",
             $action,
             $name
         );
