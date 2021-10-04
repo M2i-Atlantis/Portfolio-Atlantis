@@ -78,14 +78,35 @@ class ProjectController{
   }
 
 
+  function getAll(){
+
+    $projets = new ProjectDao;
+    $allProjects = $projets->getAll(1);
+    if (!empty($projets)){
+
+      ob_start();
+
+      require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "ProjectView", "index.html.php"]);
+
+      $contentTimeout = ob_get_clean();
+
+      require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+
+
+
+    }
+
+
+  }
+
+
+  // function update(int $id) : void {
+    
 
 
 
 
-
-    // $project = new Project;
-    // return $project;
-    // }
+  // }
 
     // function update() : void {
 
@@ -95,10 +116,6 @@ class ProjectController{
 
     // }
 
-    // function getAll() : array{
-    //   return $test = [];
-
-    // }
 
 
 }

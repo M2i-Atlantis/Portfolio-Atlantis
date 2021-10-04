@@ -4,6 +4,8 @@
 
 $router->add("/project/create", ['GET','POST'], 'App\controllers\ProjectController', 'create', 'projectCreate');
 
-$router->add("/project/(\d+)/show", ['GET'], 'App\controllers\ProjectController', 'showOne', 'projectShowOne');
+$router->add("/project/(\d+)/show", ['GET'], 'App\controllers\ProjectController', 'getById', 'projectShowOne');
+
+$router->add("/project/index", ['GET'], 'App\controllers\ProjectController', 'getAll', 'projectShowAll');
 
 // $router->add("/project/update",['GET'], 'App\controllers\ProjectController', 'update', 'projectUpdate');
