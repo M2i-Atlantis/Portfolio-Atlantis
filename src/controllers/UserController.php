@@ -3,9 +3,9 @@
 namespace App\controllers;
 
 use App\dao\CvDao;
-use PDOException;
 use App\dao\UserDao;
-use App\Models\UserModel;
+use App\models\UserModel;
+use PDOException;
 
 class UserController extends AbstractController
 {
@@ -32,7 +32,7 @@ class UserController extends AbstractController
                 "password" => [FILTER_SANITIZE_STRING],
                 "lastname" => [FILTER_SANITIZE_STRING],
                 "firstname" => [FILTER_SANITIZE_STRING],
-                "adress" => [FILTER_SANITIZE_STRING]
+                "adress" => [FILTER_SANITIZE_STRING],
             ];
 
             $registerUser_input = filter_input_array(INPUT_POST, $arguments);
@@ -77,7 +77,7 @@ class UserController extends AbstractController
                     $this->renderer->render(
                         ["layout.html.php"],
                         ["user", "register.html.php"],
-                        ["title" => 'S\'inscrire',  "errors" => $errorList]
+                        ["title" => 'S\'inscrire', "errors" => $errorList]
                     );
                 }
 
@@ -115,14 +115,14 @@ class UserController extends AbstractController
                 "password" => [FILTER_SANITIZE_STRING],
                 "lastname" => [FILTER_SANITIZE_STRING],
                 "firstname" => [FILTER_SANITIZE_STRING],
-                "adress" => [FILTER_SANITIZE_STRING]
+                "adress" => [FILTER_SANITIZE_STRING],
             ];
 
             $editUser_input = filter_input_array(INPUT_POST, $arguments);
 
             $errorList = ErrorController::editError($editUser_input);
 
-            if  (empty($editUser_input['password'])) {
+            if (empty($editUser_input['password'])) {
                 $editUser_input['password'] = $_SESSION['currentUser']->getPassword();
             }
 

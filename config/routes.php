@@ -1,6 +1,6 @@
 <?php
 // add(string "regex", array "methods", string "controller", string "action", string "name")
-// $router->add();
+//$router->add();
 /**
  * Ici se trouvera toutes les routes vers les controllers
  *
