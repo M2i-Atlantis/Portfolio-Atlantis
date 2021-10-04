@@ -14,35 +14,42 @@
     <!-- Personal JavaScript -->
     <script src="/js/app.js" defer></script>
 
-    <title><?= $title ? $title : 'portfolio' ?></title>
+    <title><?=isset($title) ? $title : 'portfolio'?></title>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Portfolio Atlantis</a>
-    
+                <a class="navbar-brand" href="/">Portfolio Atlantis</a>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-    
-                <div class="collapse navbar-collapse flex-row-reverse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">Accueil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Se connecter</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Se déconnecter</a>
-                        </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" href="#">Formation</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
-                        </li> -->
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav  me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/">Liste des CV</a>
+                            </li>
+                        <?php if (isset($_SESSION['currentUser'])): ?>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <?=$_SESSION['currentUser']->getUsername()?>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                                    <li><a class="dropdown-item" href="<?=sprintf('/cv/%d', $_SESSION['currentUser']->cv_id)?>">Mon CV</a></li>
+                                    <li><a class="dropdown-item" href="/user/edit">Modifier</a></li>
+                                    <li><a class="dropdown-item" href="/logout">Déconnexion</a></li>
+                                </ul>
+                            </li>
+                        <?php else: ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/login">Connexion</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/register">S'inscrire</a>
+                            </li>
+                        <?php endif;?>
                     </ul>
                 </div>
             </div>
@@ -50,6 +57,7 @@
     </header>
 
     <main>
+<<<<<<< HEAD
         <?= $content; ?>
     </main>
 
@@ -59,6 +67,13 @@
         </div>
     </footer>
 
+=======
+        <?php if (isset($content)): ?>
+           <?=$content;?>
+        <?php endif;?>
+    </main>
+
+>>>>>>> dev
     <!-- Boostrap javaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 </body>

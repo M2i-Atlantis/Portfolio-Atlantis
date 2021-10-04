@@ -52,6 +52,11 @@ class Renderer
         array_unshift($pathContentView, $this->pathView);
 
         extract($options);
+        
+        foreach ($options as $key => $value)
+        {
+            ${$key} = $value;
+        }
 
         ob_start();
         require implode(DIRECTORY_SEPARATOR, $pathContentView);

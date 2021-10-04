@@ -27,6 +27,11 @@ $router = Router::getInstance();
  */
 require implode(DIRECTORY_SEPARATOR, [ROOT, 'config', 'routes.php']);
 
+/**
+ * Démarre un nouvelle session
+ */
+session_start();
+
 try {
     $route = $router->match();
     /**
@@ -35,7 +40,7 @@ try {
      * équivaut à : (new App\Controller\ArticleController())->index()
      * équivaut à : (new App\Controller\ArticleController())->show($id)
      */
-    (new ($route->getController())(Router::getInstance(), Renderer::getInstance()))->{$route->getAction()}(...$router->getMatches());
+    (new ($route->getController())(Renderer::getInstance()))->{$route->getAction()}(...$router->getMatches());
 } catch (RouteNotFoundException $e) {
     echo $e->getMessage();
     // header("Location: /"); // ou error 404

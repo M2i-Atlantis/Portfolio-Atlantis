@@ -33,15 +33,14 @@ class Router
      * @return Route
      * @throws RouteNotFoundException
      */
-    public function match(): Route
+    public function match(): ?Route
     {
         foreach ($this->routes as $route) {
             $regex = $route->getRegex();
-
-            if (preg_match("#^$regex$#", filter_input(INPUT_SERVER, 'REQUEST_URI'), $this->matches)) {
+            if (preg_match("#^" . $regex . "$#", filter_input(INPUT_SERVER, 'REQUEST_URI'), $this->matches)) {
                 array_shift($this->matches);
 
-                foreach ($route->getMethods() as  $method) {
+                foreach ($route->getMethods() as $method) {
                     if ($method === filter_input(INPUT_SERVER, "REQUEST_METHOD")) {
                         return $route;
                     }
@@ -75,7 +74,7 @@ class Router
         $this->routes[] = new Route(
             $regex,
             $methods,
-            $controller,
+            "App\controllers\\$controller",
             $action,
             $name
         );
