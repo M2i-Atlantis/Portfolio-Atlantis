@@ -9,6 +9,39 @@
  *
  * @var \core\Router\Router $router
  */
-$router->add("/(training)", ["GET"], "App\controller\TrainingController", "index", "training");
-$router->add("/(training)/new", ["GET", "POST"], "App\controller\TrainingController", "index", "create");
-$router->add("/(training)/(\d+)/show", ["GET"], "App\controller\TrainingController", "show", "getById");
+$router->add(
+    "/(training)",
+    ["GET"],
+    "App\controllers\TrainingController",
+    "getAll",
+    "training"
+);
+
+$router->add(
+    "/(training)/new",
+    ["GET", "POST"],
+    "App\controllers\TrainingController",
+    "new",
+    "training_create"
+);
+$router->add(
+    "/(training)/(\d+)/show",
+    ["GET"],
+    "App\controllers\TrainingController",
+    "show",
+    "training_show"
+);
+$router->add(
+    "/(training)/(\d+)/edit",
+    ["GET", "POST"],
+    "App\controllers\TrainingController",
+    "edit",
+    "training_update"
+);
+$router->add(
+    "/(training)/(\d+)/delete",
+    ["GET"],
+    "App\controllers\TrainingController",
+    "delete",
+    "training_delete"
+);

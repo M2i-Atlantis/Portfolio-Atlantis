@@ -16,7 +16,6 @@ class Router
     function match(): ?Route {
         foreach ($this->routes as $route) {
             $regex = $route->getRegex();
-
             if (preg_match("#^" . $regex . "$#", filter_input(INPUT_SERVER, 'REQUEST_URI'), $this->matches)) {
                 array_shift($this->matches);
 
