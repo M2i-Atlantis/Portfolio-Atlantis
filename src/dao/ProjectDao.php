@@ -102,6 +102,56 @@ class ProjectDao {
         return $result;
     }
 
+/**
+ * Permet de changer les données d'un projet dans la BDD
+ */
+    public function update($project) : int {
+
+        $dataBaseHandler = Database::getInstance()->getConnexion();
+        $request = $dataBaseHandler->prepare('UPDATE project 
+                                                SET title = :title, 
+                                                    description = :description,
+                                                    starting_date = :starting_date,
+                                                    ending_date = :ending_date 
+                                                    WHERE id = :id ');
+        $request->execute(
+            [
+                ":title"=>$project->getTitle(),
+                ":description"=>$project->getDescription(),
+                ":starting_date"=>$project->getBeginningDate(),
+                ":ending_date"=>$project->getEndingDate(),
+                ":id"=>$project->getId()
+            ]
+        );
+        return $project->getId();
+    }
+
+
+/**
+ * Permet la suppresion d'un projet dans la BDD
+ * @param : int $id du projet a supprimer
+ */
+    public function delete(int $idProject){
+        $dataBaseHandler = Database::getInstance()->getConnexion();
+        $request = $dataBaseHandler->prepare('DELETE FROM project WHERE id = :id');
+        $request->execute(
+            [
+                ":id"=>$idProject
+            ]
+            );
+
+
+
+    }
+
+
+
+
+
+
 }
+
+
+
 
 ?>

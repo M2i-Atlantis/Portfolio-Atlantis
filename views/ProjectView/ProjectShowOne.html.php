@@ -1,6 +1,6 @@
 <?php
 
-use App\models\Project;
+
 // Ajouter ici un message de confirmation de création !
 
 ?>
