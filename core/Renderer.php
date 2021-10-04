@@ -51,6 +51,8 @@ class Renderer
         array_unshift($pathBaseView, $this->pathView);
         array_unshift($pathContentView, $this->pathView);
 
+        extract($options);
+        
         foreach ($options as $key => $value)
         {
             ${$key} = $value;
