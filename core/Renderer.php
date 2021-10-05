@@ -12,12 +12,12 @@ class Renderer
     /**
      * @var Renderer Contient une instance d'elle-même
      */
-    protected static Renderer $instance;
+    protected static $instance;
 
     /**
      * @var string Contient le chemin du dossier des vues
      */
-    protected string $pathView;
+    protected $pathView;
 
     /**
      * @param string|null $pathView Chemin du dossier des vues, par défaut c'est le dossier views à la racine du projet
@@ -52,11 +52,6 @@ class Renderer
         array_unshift($pathContentView, $this->pathView);
 
         extract($options);
-        
-        foreach ($options as $key => $value)
-        {
-            ${$key} = $value;
-        }
 
         ob_start();
         require implode(DIRECTORY_SEPARATOR, $pathContentView);

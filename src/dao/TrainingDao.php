@@ -3,6 +3,7 @@ namespace App\dao;
 
 use App\models\Training;
 use core\Database;
+use PDO;
 use PDOException;
 
 class TrainingDao extends Database
@@ -23,7 +24,7 @@ class TrainingDao extends Database
 
     }
 
-    public function create(array $training): int
+    public function create($training): int
     {
         try {
 
@@ -42,13 +43,13 @@ class TrainingDao extends Database
                 :starting_date,
                 :ending_date,
                 :id_cv)");
-            $query->bindParam(":school_name", $training["chool_name"]);
-            $query->bindParam(":training_name", $training["training_name"]);
-            $query->bindParam(":description", $training["description"]);
-            $query->bindParam(":diploma", $training["diploma"]);
-            $query->bindParam(":starting_date", $training["startng_date"]);
-            $query->bindParam(":ending_date", $training["ending_date"]);
-            $query->bindParam(":id_cv", $userId);
+            $query->bindParam(":school_name", $training->getSchool_name());
+            $query->bindParam(":training_name", $training->getTraining_name());
+            $query->bindParam(":description", $training->getDescription());
+            $query->bindParam(":diploma", $training->getDiploma());
+            $query->bindParam(":starting_date", $training->getStarting_date());
+            $query->bindParam(":ending_date", $training->getEnding_date());
+            $query->bindParam(":id_cv", $training->getIdCv());
 
             $query->execute();
 
@@ -62,15 +63,16 @@ class TrainingDao extends Database
 
     }
 
-    public function getAll(int $userId): array
+    public function getAll(int $cvId): array
     {
         try {
 
-            $query = $this->dbHandler->prepare("SELECT * FROM training WHERE id_cv = :userId");
-            $query->execute(["userId" => $userId]);
-            $results = $query->fetchObject(Training::class);
+            $query = $this->dbHandler->prepare("SELECT * FROM training WHERE id_cv = :cvId");
+            $query->execute(["cvId" => $cvId]);
+            $results = $query->fetchAll(PDO::FETCH_ASSOC);
 
             if (!empty($results)) {
+
                 return $results;
             } else {
                 return null;
@@ -94,7 +96,6 @@ class TrainingDao extends Database
 
     public function update(array $training, int $training_id)
     {
-
         try {
 
             $query = $this->dbHandler->prepare("UPDATE training
@@ -106,8 +107,7 @@ class TrainingDao extends Database
                                             starting_date = :starting_date,
                                             ending_date = :ending_start,
                                             id_cv= :id_cv
-                                            WHERE id = :id"
-            );
+                                            WHERE id = :id");
 
             $query->bindParam(":school_name", $training["school_name"]);
             $query->bindParam(":training_name", $training["training_name"]);
@@ -115,11 +115,9 @@ class TrainingDao extends Database
             $query->bindParam(":diploma", $training["diploma"]);
             $query->bindParam(":starting_date", $training["starting_date"]);
             $query->bindParam(":ending_start", $training["ending_start"]);
-            $query->bindParam(":id_cv", $training["id_cv"]);
+            $query->bindParam(":id_cv", $training["idCv"]);
             $query->bindParam(":id", $training_id);
             $query->execute();
-
-            return $query->fetchObject(Training::class);
 
         } catch (PDOException $e) {
             echo "update failed" . PHP_EOL . $e->getMessage();

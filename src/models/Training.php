@@ -7,10 +7,19 @@ use App\dao\TrainingDao;
 class Training
 {
 
-    public function __construct()
-    {
+    private $id;
+    private $school_name;
+    private $training_name;
+    private $description;
+    private $diploma;
+    private $starting_date;
+    private $ending_date;
+    private $idCv;
 
-    }
+    // public function __construct()
+    // {
+
+    // }
 
     /**
      * ajoute une nouvelle formation
@@ -19,7 +28,7 @@ class Training
      * @param [type] $userId
      * @return void
      */
-    public static function create(array $training)
+    public static function create($training)
     {
         $dbHandler = new TrainingDao();
         $newTraining = $dbHandler->create($training);
@@ -47,18 +56,19 @@ class Training
      * @param integer $userId
      * @return string|false
      */
-    public static function getAll(int $userId): array
+    public static function getAll(int $cvId): array
     {
         $dbHandler = new TrainingDao();
-        $Training = $dbHandler->getAll($userId);
+        $Training = $dbHandler->getAll($cvId);
+
         return $Training;
     }
 
-    public static function edit(array $training, int $training_id): Training | false
+    public static function edit(array $training, int $training_id)
     {
         $dbHandler = new TrainingDao();
         $training = $dbHandler->update($training, $training_id);
-        return $training;
+        return;
     }
 
     /**
@@ -74,9 +84,21 @@ class Training
         return $delete;
     }
 
-    public function setSchool_name($school_name)
+    public function setId(int $id): self
     {
-        return $this->school_name = $school_name;
+        $this->id = $id;
+        return $this;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setSchool_name(string $school_name): self
+    {
+        $this->school_name = $school_name;
+        return $this;
     }
 
     public function getSchool_name()
@@ -84,9 +106,10 @@ class Training
         return $this->school_name;
     }
 
-    public function setTraining_name($training_name)
+    public function setTraining_name(string $training_name): self
     {
-        return $this->training_name = $training_name;
+        $this->training_name = $training_name;
+        return $this;
     }
 
     public function getTraining_name()
@@ -94,9 +117,10 @@ class Training
         return $this->training_name;
     }
 
-    public function setDescription($description)
+    public function setDescription(string $description): self
     {
-        return $this->description = $description;
+        $this->description = $description;
+        return $this;
     }
 
     public function getDescription()
@@ -104,9 +128,10 @@ class Training
         return $this->description;
     }
 
-    public function setDiploma($diploma)
+    public function setDiploma(int $diploma): self
     {
-        return $this->diploma = $diploma;
+        $this->diploma = $diploma;
+        return $this;
     }
 
     public function getDiploma()
@@ -114,9 +139,10 @@ class Training
         return $this->diploma;
     }
 
-    public function setStarting_date($starting_date)
+    public function setStarting_date(string $starting_date): self
     {
-        return $this->starting_date = $starting_date;
+        $this->starting_date = $starting_date;
+        return $this;
     }
 
     public function getStarting_date()
@@ -124,9 +150,10 @@ class Training
         return $this->starting_date;
     }
 
-    public function setEnding_date($ending_date)
+    public function setEnding_date(string $ending_date): self
     {
-        return $this->ending_date = $ending_date;
+        $this->ending_date = $ending_date;
+        return $this;
     }
 
     public function getEnding_date()
@@ -134,4 +161,14 @@ class Training
         return $this->ending_date;
     }
 
+    public function setIdCv(int $idCv): self
+    {
+        $this->idCv = $idCv;
+        return $this;
+    }
+
+    public function getIdCv()
+    {
+        return $this->idCv;
+    }
 }

@@ -13,17 +13,17 @@ class Router
     /**
      * @var Router $instance Contient une instance d'elle-même
      */
-    private static Router $instance;
+    private static $instance;
 
     /**
      * @var Route[] $routes Contient un tableau de route
      */
-    private array $routes = [];
+    private $routes = [];
 
     /**
      * @var array $matches Contient un tableau de valeur récupéré lors du preg_match
      */
-    private array $matches = [];
+    private $matches = [];
 
     /**
      * Vérifies si une route correspond à la requête de l'utilisateur
@@ -33,11 +33,11 @@ class Router
      * @return Route
      * @throws RouteNotFoundException
      */
-    public function match(): ?Route
-    {
+    function match(): Route {
         foreach ($this->routes as $route) {
             $regex = $route->getRegex();
-            if (preg_match("#^" . $regex . "$#", filter_input(INPUT_SERVER, 'REQUEST_URI'), $this->matches)) {
+
+            if (preg_match("#^$regex$#", filter_input(INPUT_SERVER, 'REQUEST_URI'), $this->matches)) {
                 array_shift($this->matches);
 
                 foreach ($route->getMethods() as $method) {
@@ -107,7 +107,7 @@ class Router
      */
     public function findRoute(string $name): Route
     {
-        foreach ($this->routes as $route){
+        foreach ($this->routes as $route) {
             if ($route->getName() === $name) {
                 return $route;
             }

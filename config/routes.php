@@ -16,39 +16,32 @@ $router->add("/experience/(\d+)/delete", ['GET', 'POST'], 'App\controllers\Exper
  *
  * @var \core\Router\Router $router
  */
-$router->add(
-    "/(training)",
-    ["GET"],
-    "App\controllers\TrainingController",
-    "showAll",
-    "training"
-);
 
 $router->add(
-    "/(training)/new",
+    "/cv/(\d+)/(training)/new",
     ["GET", "POST"],
-    "App\controllers\TrainingController",
+    "TrainingController",
     "new",
     "training_create"
 );
 $router->add(
-    "/(training)/(\d+)/show",
+    "/cv/(training)/(\d+)/show",
     ["GET"],
-    "App\controllers\TrainingController",
+    "TrainingController",
     "showById",
     "training_show"
 );
 $router->add(
-    "/(training)/(\d+)/edit",
+    "/training/(\d+)/edit",
     ["GET", "POST"],
-    "App\controllers\TrainingController",
+    "TrainingController",
     "edit",
     "training_update"
 );
 $router->add(
-    "/(training)/(\d+)/delete",
+    "/training/(\d+)/delete",
     ["GET"],
-    "App\controllers\TrainingController",
+    "TrainingController",
     "delete",
     "training_delete"
 );

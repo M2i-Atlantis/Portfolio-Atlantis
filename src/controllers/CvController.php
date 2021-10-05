@@ -4,6 +4,7 @@ namespace App\controllers;
 
 use App\dao\CvDao;
 use App\models\CvModel;
+use App\models\Training;
 use PDOException;
 
 class CvController extends AbstractController
@@ -37,13 +38,14 @@ class CvController extends AbstractController
         try {
 
             $cv = (new CvDao())->getById($id);
+            $trainings = Training::getAll($id);
 
             if ($cv instanceof CvModel) {
 
                 $this->renderer->render(
                     ["layout.html.php"],
                     ["cv", "show.html.php"],
-                    ["title" => "Tous les CV", "cv" => $cv]
+                    ["title" => "Mon CV", "cv" => $cv, "trainings" => $trainings]
                 );
 
             } else {

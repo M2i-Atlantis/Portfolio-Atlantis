@@ -5,44 +5,8 @@ namespace App\controllers;
 use App\models\Training;
 use Exception;
 
-class trainingController
+class trainingController extends AbstractController
 {
-    /**
-     * get all user training by userId
-     *
-     * @return void
-     */
-    public function showAll()
-    {
-        if (!$_SESSION['currentUser']) {
-            header("Location: /");
-        }
-
-        $training = [];
-        if (!isset($userId)) {
-
-            $training = Training::getAll($this->userId);
-
-        } else {
-
-            echo "You are not logged or register";
-            header("location: ./views/login.php");
-
-        }
-
-        // Démarage de la mise en tampon
-        ob_start();
-        $title = 'Les Formations';
-        $training;
-        // Appel de la vue
-        require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "article", "index.html.php"]);
-        // Récupération et enregistrement des données dans une variable et suppression de la mémoire tampon
-        $content = ob_get_clean(); // Equivaut à ob_get_content() suivi de ob_end_clean()
-        // Appel du layout
-        require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
-
-    }
-
     /**
      * create new training
      *
@@ -58,9 +22,17 @@ class trainingController
 
         $request_method = filter_input(INPUT_SERVER, "REQUEST_METHOD");
 
-        if (isset($userId) && "GET" === $request_method) {
+        if (isset($_SESSION['currentUser']) && "GET" === $request_method) {
+            $training = new Training;
+            $errors = "error";
+            $this->renderer->render(
+                ["layout.html.php"],
+                ["training", "create.html.php"],
+                ["title" => "Ajouter une formation", "training" => $training, "idCv" => $_SESSION['currentUser']->cv_id, "errors" => $errors]
+            );
 
-        } elseif ("POST" === $request_method && isset($_SESSION[""])) {
+        } elseif ("POST" === $request_method && isset($_SESSION['currentUser'])) {
+            $param = explode("/", filter_input(INPUT_SERVER, "REQUEST_URI"));
             $args = [
                 "school_name" => [],
                 "training_name" => [],
@@ -68,40 +40,44 @@ class trainingController
                 "diploma" => [],
                 "starting_date" => [],
                 "ending_date" => [],
-                "id_cv" => [],
             ];
             $training_post = filter_input_array(INPUT_POST, $args);
+
+            //Instanciation d'une nouvelle formation avec les valeurs récupérées dans le formulaire
+            $training = (new Training())
+                ->setSchool_name($training_post["school_name"])
+                ->setTraining_name($training_post["training_name"])
+                ->setDescription($training_post["description"])
+                ->setDiploma($training_post["diploma"])
+                ->setStarting_date($training_post["starting_date"])
+                ->setEnding_date($training_post["ending_date"])
+                ->setIdCv($param[2]);
         }
-        //Instanciation d'une nouvelle formation avec les valeurs récupérées dans le formulaire
-        $training = (new Training())
-            ->setSchool_name($training_post["school_name"])
-            ->setTraining_name($training_post["training_name"])
-            ->setDescription($training_post["description"])
-            ->setDiploma($training_post["diploma"])
-            ->setStarting_date($training_post["starting_date"])
-            ->setEnding_date($training_post["ending_date"])
-            ->setId_cv($training_post["id_cv"]);
 
         if (empty($error_messages)) {
             try {
                 // Création d'une nouvelle formation et récupération de son identifiant
-                $id = Training::create($training, $_SESSION[""]);
+                $id = Training::create($training);
+
                 // Redirection sur l'affiche de l'article nouvellement créée
-                header(sprintf("Location: /article/%d/show", $id));
+                header("Location: /cv/$param[2]");
+                $this->renderer->render(
+                    ["layout.html.php"],
+                    ["training", "create.html.php"],
+                    ["title" => "Ajouter une formation", "addTraining" => $training]
+                );
+
                 exit;
             } catch (Exception $e) {
                 echo $e->getMessage();
             }
         } else {
-            // Démarage de la mise en tampon
-            ob_start();
-            $title = 'Nouvel article';
-            // Appel de la vue
-            require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
-            // Récupération et enregistrement des données dans une variable et suppression de la mémoire tampon
-            $content = ob_get_clean();
-            // Appel du layout
-            require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+            $this->renderer->render(
+                ["layout.html.php"],
+                ["training", "create.html.php"],
+                ["title" => "Ajouter une formation", "addTraining" => $training]
+            );
+
         }
     }
 
@@ -118,11 +94,11 @@ class trainingController
             $trainingModel = Training::getById($param[2]);
 
             if ($trainingModel instanceof Training) {
-                ob_start();
-                $title = $trainingModel["training_name"];
-                require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "training", "show.html.php"]);
-                $content = ob_get_clean();
-                require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+                $this->renderer->render(
+                    ["layout.html.php"],
+                    ["training", "edit.html.php"],
+                    ["title" => "Toutes les formations", "training" => $trainingModel, "idCv" => $_SESSION['currentUser']->cv_id]
+                );
 
             } else {
                 header("Location: /");
@@ -147,22 +123,18 @@ class trainingController
 
         try {
 
-            $trainingModel = Training::getById($param[2]);
+            if ("GET" === $request_method) {
 
-            if (!$trainingModel instanceof Training) {
+                $trainingModel = Training::getById($param[2]);
 
-                header("Location: /");
-                exit();
-
-            } elseif ("GET" === $request_method) {
-
-                ob_start();
-                $title = "Editer {$trainingModel["training_name"]}";
-                require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "training", "edit.html.php"]);
-                $content = ob_get_clean();
-                require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+                $this->renderer->render(
+                    ["layout.html.php"],
+                    ["training", "edit.html.php"],
+                    ["title" => "Modifer la formation", "training" => $trainingModel, "idCv" => $_SESSION['currentUser']->cv_id]
+                );
 
             } elseif ("POST" === $request_method) {
+
                 $args = [
                     "school_name" => [],
                     "training_name" => [],
@@ -170,7 +142,7 @@ class trainingController
                     "diploma" => [],
                     "starting_date" => [],
                     "ending_date" => [],
-                    "id_cv" => [],
+                    "idCv" => [],
                 ];
 
                 $training_post = filter_input_array(INPUT_POST, $args);
@@ -184,7 +156,8 @@ class trainingController
                     }
 
                     if ($countError === 0) {
-                        // enregistre les modification en base de donnée et recupere les élémnts pour les afficher
+
+                        // enregistre les modification en base de donnée et recupere les éléments pour les afficher
                         $editTraining = (new Training())
                             ->setSchool_name($training_post["school_name"])
                             ->setTraining_name($training_post["training_name"])
@@ -192,10 +165,11 @@ class trainingController
                             ->setDiploma($training_post["diploma"])
                             ->setStarting_date($training_post["starting_date"])
                             ->setEnding_date($training_post["ending_date"])
-                            ->setId_cv($training_post["id_cv"]);
+                            ->setIdCv($training_post["idCv"]);
 
                         $editTraining->edit($training_post, $param[2]);
-                        return $editTraining;
+                        header(sprintf("Location: /cv/%d", $editTraining->getIdCv()));
+
                     }
                 }
             }
@@ -215,21 +189,17 @@ class trainingController
         }
 
         $param = explode("/", filter_input(INPUT_SERVER, "REQUEST_URI"));
-        $request_method = filter_input(INPUT_SERVER, "REQUEST_METHOD");
 
-        if ($request_method === "DELETE") {
+        $delete = Training::delete($param[2]);
 
-            $delete = Training::delete($param[2]);
+        if ($delete === true) {
 
-            if ($delete === true) {
+            header("Location /");
 
-                header("Location /");
+        } else {
 
-            } else {
+            echo "delete failed";
 
-                echo "delete failed";
-
-            }
         }
     }
 

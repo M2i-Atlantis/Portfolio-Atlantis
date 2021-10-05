@@ -25,7 +25,7 @@ class ErrorController
     /**
      * Méthode gérant les érreurs du formulaire pour se connecter
      */
-    public function loginError(string $email, string $password): ?array
+    public static function loginError(string $email, string $password): ?array
     {
         $errorList = [];
 
@@ -52,7 +52,7 @@ class ErrorController
         if ($registerUser_input['email'] === false) {
             $errorList[] = 'L\'email est invalide';
         }
-        if(!preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$/', $registerUser_input['password']) && !empty($registerUser_input['password'])) {
+        if (!preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$/', $registerUser_input['password']) && !empty($registerUser_input['password'])) {
             $errorList[] = 'Le mot de passe doit contenir entre 8 et 15 caractères dont au moins une majuscule, une minuscule, un chiffre et des caractères non alphanumeriques';
         }
         if (empty($registerUser_input['password'])) {
@@ -72,7 +72,7 @@ class ErrorController
     }
 
     /**
-     * 
+     *
      */
     public function editError(array $editUser_input): ?array
     {
@@ -84,7 +84,7 @@ class ErrorController
         if ($editUser_input['email'] === false) {
             $errorList[] = 'L\'email est invalide';
         }
-        if(!preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$/', $editUser_input['password']) && !empty($editUser_input['password'])) {
+        if (!preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$/', $editUser_input['password']) && !empty($editUser_input['password'])) {
             $errorList[] = 'Le mot de passe doit contenir entre 8 et 15 caractères dont au moins une majuscule, une minuscule, un chiffre et des caractères non alphanumeriques';
         }
         if (empty($editUser_input['lastname'])) {

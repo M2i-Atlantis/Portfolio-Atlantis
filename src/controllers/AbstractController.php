@@ -6,12 +6,12 @@ use core\Renderer;
 use core\Router\Exception\RouteNotFoundException;
 use core\Router\Router;
 
-abstract class AbstractController extends ErrorController
+abstract class AbstractController
 {
     public function __construct(
+        protected Router $router,
         protected Renderer $renderer
-    )
-    {
+    ) {
     }
 
     /**
@@ -23,9 +23,7 @@ abstract class AbstractController extends ErrorController
     protected function redirectToRoute(string $name, array $options = [])
     {
         try {
-
             $route = $this->router->findRoute($name);
-
             $path = $route->getRegex();
 
             foreach ($options as $value) {
@@ -33,11 +31,8 @@ abstract class AbstractController extends ErrorController
             }
 
             header(sprintf("Location: %s", $path));
-
             exit;
-
         } catch (RouteNotFoundException $rnfe) {
-
             echo $rnfe->getMessage();
         }
     }
