@@ -25,7 +25,7 @@ $router->add(
     "training_create"
 );
 $router->add(
-    "/cv/(training)/(\d+)/show",
+    "/(training)/(\d+)/show",
     ["GET"],
     "TrainingController",
     "showById",
