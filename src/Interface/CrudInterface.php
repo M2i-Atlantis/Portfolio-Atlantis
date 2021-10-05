@@ -3,7 +3,7 @@
 // function en commun entre Experience, Trainings, 
 // CRUD Update Create Read Delete 
 
-namespace App\interface;
+namespace App\Interface;
 
 use App\models\BaseEntity;
 

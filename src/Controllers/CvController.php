@@ -1,11 +1,11 @@
 <?php
 
-namespace App\controllers;
+namespace App\Controllers;
 
-use App\dao\ContractDao;
-use App\dao\CvDao;
-Use App\dao\ExperienceDao;
-use App\models\CvModel;
+use App\Dao\ContractDao;
+use App\Dao\CvDao;
+Use App\Dao\ExperienceDao;
+use App\Models\CvModel;
 use PDOException;
 
 class CvController extends AbstractController

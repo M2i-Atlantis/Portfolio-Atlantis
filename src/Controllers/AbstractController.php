@@ -1,6 +1,6 @@
 <?php
 
-namespace App\controllers;
+namespace App\Controllers;
 
 use core\Renderer;
 use core\Router\Exception\RouteNotFoundException;

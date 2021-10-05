@@ -1,5 +1,5 @@
 <?php
-namespace App\dao;
+namespace App\Dao;
 
 use App\interface\CrudInterface;
 use App\models\BaseEntity;

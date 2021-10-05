@@ -1,5 +1,5 @@
 <?php
-namespace App\dao;
+namespace App\Dao;
 
 use App\models\Training;
 use core\Database;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\controllers;
+namespace App\Controllers;
 
 use App\dao\ExperienceDao;
 use App\dao\ContractDao;
@@ -79,15 +79,13 @@ class ExperienceController extends AbstractController
     }
 
     /** Affiche le formulaire de création */
-    private function showCreateForm(int $idCv, ?Experience $experience = null, ?array $errors = null) {
-    // private function showCreateForm(?Experience $experience = null, ?array $errors = null) {   
+    private function showCreateForm(int $idCv, ?Experience $experience = null, ?array $errors = null) { 
         $contracts = (new ContractDao())->getAll();
 
         $this->renderer->render(
             ["layout.html.php"],
             ["experience", "create.html.php"],
             ["title" => "Nouvelle expérience", "experience" => $experience, "idCv" => $idCv, "contracts" => $contracts, "errors" => $errors]);
-            // ["title" => "Nouvelle expérience", "experience" => $experience, "idCv" => $idCv, "contracts" => $contracts, "errors" => $errors]);
     }
 
     /** Obtient un validateur de données POST purifiés de l'expérience */

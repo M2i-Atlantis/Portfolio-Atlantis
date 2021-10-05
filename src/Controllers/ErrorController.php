@@ -1,6 +1,6 @@
 <?php
 
-namespace App\controllers;
+namespace App\Controllers;
 
 /**
  * Gérant les erreurs (404, 403, etc...)
