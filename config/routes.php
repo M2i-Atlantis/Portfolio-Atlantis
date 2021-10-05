@@ -1,6 +1,28 @@
 <?php
+<<<<<<< HEAD
 
 
+=======
+// add(string "regex", array "methods", string "controller", string "action", string "name")
+// $router->add();
+
+$router->add("/project/create", ['GET','POST'], 'App\controllers\ProjectController', 'create', 'projectCreate');
+
+$router->add("/project/(\d+)/show", ['GET'], 'App\controllers\ProjectController', 'getById', 'projectShowOne');
+
+$router->add("/project/index", ['GET'], 'App\controllers\ProjectController', 'getAll', 'projectShowAll');
+
+$router->add("/project/(\d+)/show/edit", ['GET','POST'], 'App\controllers\ProjectController', 'update', 'projectUpdate');
+
+$router->add("/project/(\d+)/delete", ['GET'], 'App\controllers\ProjectController', 'delete', 'projectDelete');
+
+$router->add("/experience/(\d+)", ['GET'], 'App\controllers\ExperienceController', 'index', 'experience_index');
+$router->add("/experience/create/(\d+)", ['GET', 'POST'], 'App\controllers\ExperienceController', 'create', 'experience_create');
+$router->add("/experience/(\d+)/show", ['GET'], 'App\controllers\ExperienceController', 'show', 'experience_show');
+$router->add("/experience/(\d+)/edit", ['GET', 'POST'], 'App\controllers\ExperienceController', 'edit', 'experience_edit');
+$router->add("/experience/(\d+)/delete", ['GET', 'POST'], 'App\controllers\ExperienceController', 'delete', 'experience_delete');
+// $router->add();
+>>>>>>> dev
 /**
  * Ici se trouvera toutes les routes vers les controllers
  *
