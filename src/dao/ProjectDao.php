@@ -8,7 +8,6 @@ use PDO;
 
 
 
-
 class ProjectDao {
     /**
      * Cree une nouvelle entrée dans la table Project de la BDD
@@ -34,11 +33,11 @@ class ProjectDao {
             );
         return $dataBaseHandler->lastInsertId();
     }
-/**
- * Fonction pour sélectionner un projet grace a son id
- * @param : int $id
- * @return : Null si le projet n'existe pas, sinon retourne un objet Projet
- */
+    /**
+     * Fonction pour sélectionner un projet grace a son id
+     * @param : int $id
+     * @return : Null si le projet n'existe pas, sinon retourne un objet Projet
+     */
     public function getByID(int $id) : ?Project {
         $dataBaseHandler = Database::getInstance()->getConnexion();
         $request = $dataBaseHandler->prepare('SELECT * FROM project WHERE id = :id');
@@ -58,7 +57,6 @@ class ProjectDao {
             $object->setEndingDate($result['ending_date']);
             $object->setPicture($result['picture_feature']);
             $object->setIdCv($result['id_cv']);
-
             return $object;
         }
         else {
@@ -66,21 +64,17 @@ class ProjectDao {
         }      
     }
 
-/**
- * Récupère tout les projets d'un utilisateur(cv) précis
- * @param int $id = L'id du cv
- * @return array un tableau de tout les projets du cv 
- */
+    /**
+     * Récupère tout les projets d'un utilisateur(cv) précis
+     * @param int $id = L'id du cv
+     * @return array un tableau de tout les projets du cv 
+     */
     public function getAll(int $id) : array {
 
         $dataBaseHandler = Database::getInstance()->getConnexion();
         $request = $dataBaseHandler->prepare('SELECT * FROM project 
-  
                                             WHERE id_cv = :idCv ');
-        $request->execute([
-            ":idCv"=>$id
-        ]);
-
+        $request->execute([":idCv"=>$id]);
         $result = $request->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $key => $projet){
@@ -95,17 +89,16 @@ class ProjectDao {
             $proj->setIdCv($projet['id_cv']);
 
             $result[$key] = $projet;
-
-
-
         }
         return $result;
     }
 
-/**
- * Permet de changer les données d'un projet dans la BDD
- */
-    public function update($project) : int {
+    /**
+     * Permet de changer les données d'un projet dans la BDD
+     * @param object  contenant les données à modifier
+     * @return int $idProject l'id du project
+     */
+    public function update(object $project) : int {
 
         $dataBaseHandler = Database::getInstance()->getConnexion();
         $request = $dataBaseHandler->prepare('UPDATE project 
@@ -126,11 +119,10 @@ class ProjectDao {
         return $project->getId();
     }
 
-
-/**
- * Permet la suppresion d'un projet dans la BDD
- * @param : int $id du projet a supprimer
- */
+    /**
+     * Permet la suppresion d'un projet dans la BDD
+     * @param : int $id du projet a supprimer
+     */
     public function delete(int $idProject){
         $dataBaseHandler = Database::getInstance()->getConnexion();
         $request = $dataBaseHandler->prepare('DELETE FROM project WHERE id = :id');
@@ -139,19 +131,6 @@ class ProjectDao {
                 ":id"=>$idProject
             ]
             );
-
-
-
     }
-
-
-
-
-
-
 }
-
-
-
-
 ?>

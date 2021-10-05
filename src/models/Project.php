@@ -10,11 +10,6 @@ class Project
     protected ?string $picture;
     protected int $idCv;
 
-
-
-
-
-
     /**
      * Get the value of id
      *
